@@ -1,51 +1,88 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
+// src/components/Navbar.jsx
 
-const Navbar = () => {
-  const navLinkClass = ({ isActive }) =>
-    isActive
-      ? "text-blue-600 font-semibold border-b-2 border-blue-600 pb-1 transition"
-      : "text-gray-700 hover:text-blue-600 transition";
+import React, { useState, useEffect } from 'react';
+// CORRECTED IMPORT: We are using Link from 'react-scroll'
+import { Link } from 'react-scroll'; 
+import { Menu, X } from "lucide-react";
+import { cn } from "../lib/utils";
 
-  return (
-    <nav className="bg-white/80 backdrop-blur-md shadow-lg sticky top-0 z-50 border-b border-gray-200">
-      <div className="container mx-auto px-6 py-4 flex justify-between items-center">
-        {/* Logo */}
-        <div className="text-2xl font-extrabold text-blue-600 tracking-tight">
-          <NavLink to="/" className="hover:text-blue-700 transition duration-200">
-            UWU <span className="text-gray-800">FOSS</span>
-          </NavLink>
-        </div>
+// NEW: Import your logo
+import fossLogo from '../assets/images/logo.jpg'; 
 
-        {/* Primary Nav */}
-        <ul className="hidden md:flex items-center space-x-8 text-sm font-medium">
-          <li><NavLink to="/" className={navLinkClass}>Home</NavLink></li>
-          <li><NavLink to="/about" className={navLinkClass}>About Us</NavLink></li>
-          <li><NavLink to="/events" className={navLinkClass}>Events</NavLink></li>
-          <li><NavLink to="/blog" className={navLinkClass}>Blog</NavLink></li>
-          <li><NavLink to="/gallery" className={navLinkClass}>Gallery</NavLink></li>
-          <li><NavLink to="/contact" className={navLinkClass}>Contact Us</NavLink></li>
-        </ul>
+export default function Navbar() {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
-        {/* CTA Button */}
-        <NavLink
-          to="/join"
-          className="hidden md:inline-block bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2 px-5 rounded-full shadow-md transition duration-300"
-        >
-          Join Community
-        </NavLink>
+  const navigation = [
+    { name: "Home", to: "hero-section" },
+    { name: "About", to: "about-section" },
+    { name: "Events", to: "events-section" },
+    { name: "Blog", to: "blog-section" },
+    { name: "Gallery", to: "gallery-section" },
+  ];
 
-        {/* Mobile Menu Button (Placeholder) */}
-        <div className="md:hidden">
-          <button className="text-gray-600 hover:text-blue-600 focus:outline-none transition">
-            <svg className="h-7 w-7" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-              <path d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-          </button>
-        </div>
-      </div>
-    </nav>
-  );
-};
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 10);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
-export default Navbar;
+  const linkClass = "block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white transition-colors cursor-pointer";
+  const activeLinkClass = "bg-gray-900 text-white";
+
+  return (
+    <nav className={cn("sticky top-0 z-50 transition-all duration-300", scrolled ? "bg-gray-800/80 backdrop-blur-md shadow-lg" : "bg-transparent")}>
+      <div className="container mx-auto px-6">
+        <div className="relative flex h-16 items-center justify-between">
+          
+          {/* LOGO SECTION - UPDATED */}
+          <Link to="hero-section" spy={true} smooth={true} offset={-70} duration={500} className="flex items-center cursor-pointer">
+            <img className="h-10 w-auto rounded-full" src={fossLogo} alt="FOSS UWU Logo" />
+            <span className="ml-3 text-xl font-bold text-white hidden sm:block">UWU FOSS</span>
+          </Link>
+          
+          {/* Desktop Navigation */}
+          <div className="hidden sm:ml-6 sm:flex sm:space-x-1">
+            {navigation.map((item) => (
+              <Link key={item.name} to={item.to} spy={true} smooth={true} offset={-70} duration={500} activeClass={activeLinkClass} className="px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white transition-colors cursor-pointer">
+                {item.name}
+              </Link>
+            ))}
+          </div>
+
+          {/* Join Us Button (Desktop) */}
+          <div className="hidden sm:ml-6 sm:block">
+            <Link to="join-us-section" spy={true} smooth={true} offset={-70} duration={500} className="bg-teal-500 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-teal-600 transition-colors cursor-pointer">
+              Join Us
+            </Link>
+          </div>
+
+          {/* Mobile Menu Button */}
+          <div className="flex items-center sm:hidden">
+            <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="p-2 text-gray-400 hover:text-white focus:outline-none">
+              {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Mobile Menu */}
+      {isMobileMenuOpen && (
+        <div className="sm:hidden absolute w-full bg-gray-800 shadow-lg">
+          <div className="space-y-1 px-2 pb-3 pt-2">
+            {navigation.map((item) => (
+              <Link key={item.name} to={item.to} spy={true} smooth={true} offset={-70} duration={500} activeClass={activeLinkClass} className={linkClass} onClick={() => setIsMobileMenuOpen(false)}>
+                {item.name}
+              </Link>
+            ))}
+            <Link to="join-us-section" spy={true} smooth={true} offset={-70} duration={500} className="block w-full text-left rounded-md mt-4 px-3 py-2 text-base font-medium bg-teal-500 text-white hover:bg-teal-600" onClick={() => setIsMobileMenuOpen(false)}>
+              Join Us
+            </Link>
+          </div>
+        </div>
+      )}
+    </nav>
+  );
+}

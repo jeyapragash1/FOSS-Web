@@ -3,11 +3,13 @@
 /* src/index.css */
 /* src/index.css */
 /* src/index.css */
+/* src/index.css */
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* Gradient for the Hero Section */
 .animated-gradient {
   background-size: 400% 400%;
   animation: gradient-pan 15s ease infinite;
@@ -17,4 +19,21 @@
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
+}
+
+/* NEW: Animated Digital Lines Background */
+.digital-lines-background {
+  /* A dark blue-black base color */
+  background-color: #0d1117; 
+  /* The grid lines: a faint light blue */
+  background-image: 
+    linear-gradient(rgba(0, 190, 255, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 190, 255, 0.1) 1px, transparent 1px);
+  background-size: 3rem 3rem; /* Spacing of the grid lines */
+  animation: pan-lines 60s linear infinite;
+}
+
+@keyframes pan-lines {
+  0% { background-position: 0 0; }
+  100% { background-position: 100rem 100rem; }
 }

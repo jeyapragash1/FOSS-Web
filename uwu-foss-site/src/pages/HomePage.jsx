@@ -1,171 +1,510 @@
 // src/pages/HomePage.jsx
 
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { TypeAnimation } from 'react-type-animation';
+import { Link } from 'react-scroll';
+import { ChevronLeft, ChevronRight, Quote, Calendar, Clock, MapPin } from 'lucide-react';
+// import { ChevronLeft, ChevronRight, Quote } from 'lucide-react';
+import TestimonialSlider from '../components/TestimonialSlider';
+// Add this import at the top of your HomePage.jsx file
+import heroVideo from '../assets/videos/video1.mp4';
 
+// filepath: g:\GitHub\FOSS-Web\uwu-foss-site\src\pages\HomePage.jsx
+import { Target, Eye, Award } from 'lucide-react';
 // --- Animation Variants ---
-const containerVariant = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { staggerChildren: 0.2 } },
-};
-const itemVariant = {
-  hidden: { y: 20, opacity: 0 },
-  visible: { y: 0, opacity: 1, transition: { type: 'spring', stiffness: 100 } },
-};
+const containerVariant = { hidden: { opacity: 0 }, visible: { opacity: 1, transition: { staggerChildren: 0.15 } } };
+const itemVariant = { hidden: { y: 20, opacity: 0 }, visible: { y: 0, opacity: 1, transition: { type: 'spring', stiffness: 100 } } };
 
-// --- Data for New Sections ---
-const teamMembers = [
-  { name: 'Sathya Nadella', role: 'President', img: 'https://i.pravatar.cc/150?img=5', github: '#' },
-  { name: 'Sundar Pichai', role: 'Vice President', img: 'https://i.pravatar.cc/150?img=6', github: '#' },
-  { name: 'Tim Cook', role: 'Secretary', img: 'https://i.pravatar.cc/150?img=7', github: '#' },
-  { name: 'Elon Musk', role: 'Treasurer', img: 'https://i.pravatar.cc/150?img=8', github: '#' },
+// --- Data for All Sections ---
+// --- UPDATE THIS DATA ARRAY IN HomePage.jsx ---
+
+const updates = [
+    { 
+        date: 'March 15, 2024', 
+        title: 'Open Source AI Workshop', 
+        img: 'https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&w=800&q=60',
+        buttonText: 'Register Now',
+        buttonLink: '#' // Add your registration link here
+    },
+    { 
+        date: 'March 10, 2024', 
+        title: 'New Project: "Agri-Bot"', 
+        img: 'https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&w=800&q=60',
+        buttonText: 'Learn More',
+        buttonLink: '#' // Add your GitHub project link here
+    },
+    { 
+        date: 'March 5, 2024', 
+        title: 'Industry Speaker Series', 
+        img: 'https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&w=800&q=60',
+        buttonText: 'Learn More',
+        buttonLink: '#' // Add a link to more details
+    },
+];
+// --- UPDATE THIS DATA ARRAY IN HomePage.jsx ---
+
+const events = [
+    { 
+        title: 'FOSSYCon 2024', 
+        date: 'November 15, 2023', 
+        time: '10:00 AM - 5:00 PM', 
+        location: 'Main Auditorium',
+        desc: 'Join us for our annual flagship conference where industry leaders share insights on the future of open source.',
+        img: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=800&q=80'
+    },
+    { 
+        title: 'Open AI Summit', 
+        date: 'December 1, 2023', 
+        time: '9:00 AM - 4:00 PM',
+        location: 'Innovation Center',
+        desc: 'Explore the latest advancements in open-source AI, from large language models to computer vision.',
+        img: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=800&q=80'
+    },
+    { 
+        title: 'React Hands-on Workshop', 
+        date: 'December 10, 2023', 
+        time: '1:00 PM - 3:00 PM',
+        location: 'Computer Lab 01',
+        desc: 'A hands-on workshop for aspiring web developers. Build a complete app from scratch with React.',
+        img: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=800&q=80'
+    },
 ];
 
-const galleryImages = [
-  "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=800&q=60",
-  "https://images.unsplash.com/photo-1523580494863-6f3031224c94?auto=format&fit=crop&w=800&q=60",
-  "https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=800&q=60",
-  "https://images.unsplash.com/photo-1579567761406-4684ee0c75b6?auto=format&fit=crop&w=800&q=60",
+const leadershipTeam = [
+     { name: 'Imasha Vithanage', role: 'Lead UI/UX Designer', img: 'https://images.unsplash.com/photo-1554151228-14d9def656e4?auto=format&fit=crop&w=400&q=80' },
+    { name: 'Praveen Jayasuriya', role: 'Graphic Designer', img: 'https://images.unsplash.com/photo-1599566150163-29194dcaad36?auto=format&fit=crop&w=400&q=80' },
+    { name: 'Nethmi Silva', role: 'Event Coordinator', img: 'https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?auto=format&fit=crop&w=400&q=80' },
+    { name: 'Kavindu Perera', role: 'Partnerships Lead', img: 'https://images.unsplash.com/photo-1629425733761-caae3b5f2e50?auto=format&fit=crop&w=400&q=80' },
+    { name: 'Fathima Rushdha', role: 'Social Media Manager', img: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80' },
+    { name: 'Nethmi Silva', role: 'Event Coordinator', img: 'https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?auto=format&fit=crop&w=400&q=80' },
+    { name: 'Kavindu Perera', role: 'Partnerships Lead', img: 'https://images.unsplash.com/photo-1629425733761-caae3b5f2e50?auto=format&fit=crop&w=400&q=80' },
+    { name: 'Fathima Rushdha', role: 'Social Media Manager', img: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80' },
+
+  ];
+const coordinatingTeam = [
+    { name: 'Imasha Vithanage', role: 'Lead UI/UX Designer', img: 'https://images.unsplash.com/photo-1554151228-14d9def656e4?auto=format&fit=crop&w=400&q=80' },
+    { name: 'Praveen Jayasuriya', role: 'Graphic Designer', img: 'https://images.unsplash.com/photo-1599566150163-29194dcaad36?auto=format&fit=crop&w=400&q=80' },
+    { name: 'Nethmi Silva', role: 'Event Coordinator', img: 'https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?auto=format&fit=crop&w=400&q=80' },
+    { name: 'Kavindu Perera', role: 'Partnerships Lead', img: 'https://images.unsplash.com/photo-1629425733761-caae3b5f2e50?auto=format&fit=crop&w=400&q=80' },
+    { name: 'Fathima Rushdha', role: 'Social Media Manager', img: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80' },
+    { name: 'Nethmi Silva', role: 'Event Coordinator', img: 'https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?auto=format&fit=crop&w=400&q=80' },
+    { name: 'Kavindu Perera', role: 'Partnerships Lead', img: 'https://images.unsplash.com/photo-1629425733761-caae3b5f2e50?auto=format&fit=crop&w=400&q=80' },
+    { name: 'Fathima Rushdha', role: 'Social Media Manager', img: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80' },
+
+  ];
+const technicalTeam = [
+    { name: 'Imasha Vithanage', role: 'Lead UI/UX Designer', img: 'https://images.unsplash.com/photo-1554151228-14d9def656e4?auto=format&fit=crop&w=400&q=80' },
+    { name: 'Praveen Jayasuriya', role: 'Graphic Designer', img: 'https://images.unsplash.com/photo-1599566150163-29194dcaad36?auto=format&fit=crop&w=400&q=80' },
+    { name: 'Nethmi Silva', role: 'Event Coordinator', img: 'https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?auto=format&fit=crop&w=400&q=80' },
+    { name: 'Kavindu Perera', role: 'Partnerships Lead', img: 'https://images.unsplash.com/photo-1629425733761-caae3b5f2e50?auto=format&fit=crop&w=400&q=80' },
+    { name: 'Fathima Rushdha', role: 'Social Media Manager', img: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80' },
+    { name: 'Nethmi Silva', role: 'Event Coordinator', img: 'https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?auto=format&fit=crop&w=400&q=80' },
+    { name: 'Kavindu Perera', role: 'Partnerships Lead', img: 'https://images.unsplash.com/photo-1629425733761-caae3b5f2e50?auto=format&fit=crop&w=400&q=80' },
+    { name: 'Fathima Rushdha', role: 'Social Media Manager', img: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80' },
+
+  ];
+const designTeam = [
+    { name: 'Imasha Vithanage', role: 'Lead UI/UX Designer', img: 'https://images.unsplash.com/photo-1554151228-14d9def656e4?auto=format&fit=crop&w=400&q=80' },
+    { name: 'Praveen Jayasuriya', role: 'Graphic Designer', img: 'https://images.unsplash.com/photo-1599566150163-29194dcaad36?auto=format&fit=crop&w=400&q=80' },
+    { name: 'Nethmi Silva', role: 'Event Coordinator', img: 'https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?auto=format&fit=crop&w=400&q=80' },
+    { name: 'Kavindu Perera', role: 'Partnerships Lead', img: 'https://images.unsplash.com/photo-1629425733761-caae3b5f2e50?auto=format&fit=crop&w=400&q=80' },
+    { name: 'Fathima Rushdha', role: 'Social Media Manager', img: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80' },
+    { name: 'Nethmi Silva', role: 'Event Coordinator', img: 'https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?auto=format&fit=crop&w=400&q=80' },
+    { name: 'Kavindu Perera', role: 'Partnerships Lead', img: 'https://images.unsplash.com/photo-1629425733761-caae3b5f2e50?auto=format&fit=crop&w=400&q=80' },
+    { name: 'Fathima Rushdha', role: 'Social Media Manager', img: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80' },
+
+
+  ];
+
+// --- UPDATE THIS DATA ARRAY IN HomePage.jsx ---
+
+const testimonials = [
+    { 
+        quote: "Joining FOSS was the best decision of my university life. I learned Git and contributed to a real project in my first semester.", 
+        name: 'Nimali Perera', 
+        role: '3rd Year, Computer Science', 
+        img: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=400&q=80' 
+    },
+    { 
+        quote: "The workshops are top-notch. The Docker session clarified so many complex concepts. The community is incredibly supportive.", 
+        name: 'Sahan Rathnayake', 
+        role: '2nd Year, Engineering Tech', 
+        img: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=400&q=80' 
+    },
+    { 
+        quote: "I met my hackathon team and future project partners through FOSS. It's more than a club; it's a network that pushes you.", 
+        name: 'Fathima Rizwan', 
+        role: '4th Year, Computer Science', 
+        img: 'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=400&q=80' 
+    },
 ];
 
-const HomePage = () => {
-  return (
-    <div className="bg-gray-900 text-white overflow-x-hidden">
+const chapters = [
+    { name: 'Web & Cloud', icon: '☁️', desc: 'Exploring modern web frameworks, cloud deployment, and CI/CD pipelines.' },
+    { name: 'AI & Data Science', icon: '🤖', desc: 'Diving into data science, neural networks, and open-source AI.' },
+    { name: 'Cybersecurity & Privacy', icon: '🛡️', desc: 'Focusing on ethical hacking, network security, and digital privacy tools.' },
+    { name: 'Systems & DevOps', icon: '🐧', desc: 'Working with Linux, shell scripting, containerization, and automation.' },
+];
 
-      {/* 1. HERO SECTION (ENHANCED) */}
-      <section className="relative flex items-center justify-center h-screen text-center overflow-hidden">
-        <div className="absolute inset-0 z-0 animated-gradient" style={{ backgroundImage: 'linear-gradient(to right, #134e4a, #1e3a8a, #4c1d95)' }}></div>
-        <div className="absolute inset-0 z-10 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-20"></div>
-        <motion.div className="relative z-20" initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8 }}>
-          <motion.h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-white mb-4" initial={{ y: -30 }} animate={{ y: 0 }} transition={{ duration: 0.5, delay: 0.2 }}>
-            FOSS Community UWU
-          </motion.h1>
-          <motion.p className="text-lg md:text-xl text-gray-200 max-w-3xl mx-auto mb-8" initial={{ y: 30 }} animate={{ y: 0 }} transition={{ duration: 0.5, delay: 0.4 }}>
-            Explore the Universe of Open Source. Innovate, Collaborate, and Build the Future, Together.
-          </motion.p>
-          <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: 'spring', stiffness: 120, damping: 10, delay: 0.6 }}>
-            <a href="/join" className="bg-white text-gray-900 font-bold py-3 px-8 rounded-full text-lg hover:bg-opacity-90 transition transform hover:scale-105 shadow-2xl">
-              Start Your Journey
-            </a>
-          </motion.div>
-        </motion.div>
-      </section>
+const blogPosts = [
+    { slug: 'mastering-git-and-github', title: 'Mastering Git & GitHub', img: 'https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?auto=format&fit=crop&w=800&q=60' },
+    { slug: 'why-you-should-learn-linux', title: 'Why You Should Learn Linux', img: 'https://images.unsplash.com/photo-1599658880436-c61792e70672?auto=format&fit=crop&w=800&q=60' },
+    { slug: 'intro-to-modern-web-dev', title: 'Intro to Modern Web Dev', img: 'https://images.unsplash.com/photo-1593720213428-28a5b9e94613?auto=format&fit=crop&w=800&q=60' },
+];
 
-      {/* 2. IMPACT IN NUMBERS SECTION */}
-      <motion.section className="py-20 bg-gray-900" variants={containerVariant} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.5 }}>
-        <div className="container mx-auto px-6 text-center">
-          <motion.div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <motion.div variants={itemVariant} className="p-4"><h3 className="text-5xl font-bold text-teal-400">100+</h3><p className="text-gray-400 mt-2">Community Members</p></motion.div>
-            <motion.div variants={itemVariant} className="p-4"><h3 className="text-5xl font-bold text-teal-400">25+</h3><p className="text-gray-400 mt-2">Events & Workshops</p></motion.div>
-            <motion.div variants={itemVariant} className="p-4"><h3 className="text-5xl font-bold text-teal-400">15+</h3><p className="text-gray-400 mt-2">Open Source Projects</p></motion.div>
-          </motion.div>
-        </div>
-      </motion.section>
+const galleryImages = ["https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=800&q=60", "https://images.unsplash.com/photo-1523580494863-6f3031224c94?auto=format&fit=crop&w=800&q=60", "https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=800&q=60", "https://images.unsplash.com/photo-1579567761406-4684ee0c75b6?auto=format&fit=crop&w=800&q=60"];
 
-      {/* 3. WHAT WE DO SECTION */}
-      <section className="py-24 bg-gray-800">
-        <div className="container mx-auto px-6">
-          <motion.h2 className="text-4xl font-bold text-center mb-16 text-white" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>Our Core Activities</motion.h2>
-          <motion.div className="grid grid-cols-1 md:grid-cols-3 gap-10" variants={containerVariant} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }}>
-            <motion.div variants={itemVariant} className="bg-gray-900 p-8 rounded-lg text-center shadow-lg hover:shadow-teal-400/20 transform hover:-translate-y-2 transition-all duration-300"><div className="flex justify-center mb-4"><svg className="w-16 h-16 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg></div><h3 className="text-2xl font-bold mb-2 text-white">Hands-on Workshops</h3><p className="text-gray-400">Learn cutting-edge technologies like Git, Docker, and Cloud Native from industry experts and senior students.</p></motion.div>
-            <motion.div variants={itemVariant} className="bg-gray-900 p-8 rounded-lg text-center shadow-lg hover:shadow-teal-400/20 transform hover:-translate-y-2 transition-all duration-300"><div className="flex justify-center mb-4"><svg className="w-16 h-16 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6.253v11.494m-9-5.747h18"></path><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9.75 6.75l4.5 4.5-4.5 4.5"></path></svg></div><h3 className="text-2xl font-bold mb-2 text-white">Hackathons & Ideathons</h3><p className="text-gray-400">Compete in high-energy events to solve real-world problems, showcase your skills, and build innovative solutions.</p></motion.div>
-            <motion.div variants={itemVariant} className="bg-gray-900 p-8 rounded-lg text-center shadow-lg hover:shadow-teal-400/20 transform hover:-translate-y-2 transition-all duration-300"><div className="flex justify-center mb-4"><svg className="w-16 h-16 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M2.25 12.75V12A2.25 2.25 0 014.5 9.75h15A2.25 2.25 0 0121.75 12v.75m-8.69-6.44l-2.12-2.12a1.5 1.5 0 00-1.061-.44H4.5A2.25 2.25 0 002.25 6v12a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9a2.25 2.25 0 00-2.25-2.25h-5.379a1.5 1.5 0 01-1.06-.44z"></path></svg></div><h3 className="text-2xl font-bold mb-2 text-white">Open Source Projects</h3><p className="text-gray-400">Collaborate on meaningful open source projects, contribute code, and build a portfolio that stands out.</p></motion.div>
-          </motion.div>
-        </div>
-      </section>
-      
-      {/* === NEW SECTION 1: MEET THE EXECUTIVE COMMITTEE === */}
-      <section className="py-24 bg-gray-900">
-        <div className="container mx-auto px-6 text-center">
-          <motion.h2 className="text-4xl font-bold mb-4 text-white" initial={{opacity:0}} whileInView={{opacity:1}} viewport={{once: true}}>Meet the Leadership</motion.h2>
-          <motion.p className="text-lg text-gray-400 max-w-2xl mx-auto mb-16" initial={{opacity:0}} whileInView={{opacity:1}} viewport={{once: true}} transition={{delay: 0.2}}>
-            The passionate individuals guiding our community's vision and activities.
-          </motion.p>
-          <motion.div className="grid grid-cols-2 md:grid-cols-4 gap-8" variants={containerVariant} initial="hidden" whileInView="visible" viewport={{once:true}}>
-            {teamMembers.map((member, index) => (
-              <motion.div key={index} variants={itemVariant} className="flex flex-col items-center group">
-                <img src={member.img} alt={member.name} className="w-32 h-32 rounded-full mb-4 border-4 border-gray-700 group-hover:border-teal-400 transition-all duration-300 transform group-hover:scale-110" />
+
+const TeamGrid = ({ teamData }) => (
+    <motion.div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-8 mt-12" variants={containerVariant} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+        {teamData.map((member, i) => (
+            <motion.div key={i} variants={itemVariant} className="text-center">
+                <img src={member.img} alt={member.name} className="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-gray-700 object-cover" />
                 <h3 className="font-bold text-xl text-white">{member.name}</h3>
                 <p className="text-teal-400">{member.role}</p>
-              </motion.div>
+            </motion.div>
+        ))}
+    </motion.div>
+);
+
+const HomePage = () => {
+  const [activeTeamTab, setActiveTeamTab] = useState('Leadership');
+  const [currentTestimonial, setCurrentTestimonial] = useState(0);
+
+  const nextTestimonial = () => setCurrentTestimonial(prev => (prev === testimonials.length - 1 ? 0 : prev + 1));
+  const prevTestimonial = () => setCurrentTestimonial(prev => (prev === 0 ? testimonials.length - 1 : prev - 1));
+
+  return (
+    <div className="bg-gray-900 text-white">
+    {/* === 1. HERO SECTION (with Video Background) === */}
+<section id="hero-section" className="relative flex items-center justify-center h-screen text-center overflow-hidden">
+  
+  {/* The Video Background Layer */}
+  <video 
+    src={heroVideo} 
+    autoPlay 
+    loop 
+    muted 
+    playsInline
+    className="absolute top-0 left-0 w-full h-full object-cover z-0"
+  >
+    Your browser does not support the video tag.
+  </video>
+
+  {/* The Darkening Overlay for Text Readability */}
+  <div className="absolute inset-0 bg-black/60 z-10"></div>
+
+  {/* The Content Layer */}
+  <motion.div 
+    className="relative z-20" 
+    initial={{ opacity: 0 }} 
+    animate={{ opacity: 1 }} 
+    transition={{ duration: 0.5 }}
+  >
+    <motion.p 
+      className="text-3xl md:text-5xl text-teal-300 tracking-widest uppercase" 
+      initial={{ opacity: 0 }} 
+      animate={{ opacity: 1 }} 
+      transition={{ duration: 1, delay: 0.5 }}
+    >
+      Welcome To
+    </motion.p>
+    
+    <TypeAnimation 
+      sequence={[1000, 'FOSS Uva Wellassa University']} 
+      wrapper="h1" 
+      speed={50} 
+      cursor={true} 
+      className="text-5xl md:text-7xl font-extrabold text-white my-4" 
+    />
+    
+    <motion.p 
+      className="text-lg md:text-3xl text-gray-200" 
+      initial={{ opacity: 0 }} 
+      animate={{ opacity: 1 }} 
+      transition={{ duration: 1, delay: 3.5 }}
+    >
+      The Free And Open Source Software Community
+    </motion.p>
+  </motion.div>
+  
+</section>
+
+{/* === WHO WE ARE SECTION (Ultimate FOSS Style) === */}
+<section id="about-section" className="py-24 bg-gray-900 overflow-hidden">
+  <div className="container mx-auto px-6">
+    
+    {/* Section Header */}
+    <motion.div 
+      className="text-center mb-20"
+      initial={{ opacity: 0, y: -30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.7, ease: "easeOut" }}
+    >
+      <p className="text-lg font-semibold text-teal-400 tracking-widest uppercase">Who We Are</p>
+      <h2 className="text-4xl md:text-5xl font-extrabold mt-2 text-white">
+        A Community Driven by Open Collaboration
+      </h2>
+      <p className="mt-4 max-w-3xl mx-auto text-lg text-gray-400">
+          We are a dynamic community of developers, designers, and tech enthusiasts committed to professional development, technical excellence, and making a positive impact through open source.
+      </p>
+    </motion.div>
+
+    {/* Three-Card Grid */}
+    <motion.div 
+      className="grid grid-cols-1 md:grid-cols-3 gap-8"
+      variants={containerVariant}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+    >
+      {/* Card 1: Our Mission */}
+      <motion.div 
+        variants={itemVariant}
+        whileHover={{ y: -15, scale: 1.05, rotateX: 5, rotateY: -5 }}
+        transition={{ type: 'spring', stiffness: 300 }}
+        className="bg-white/5 backdrop-blur-lg p-8 rounded-2xl border border-white/10 text-center flex flex-col items-center shadow-lg cursor-pointer"
+        style={{ transformStyle: "preserve-3d" }}
+      >
+        <div className="bg-gray-800 p-4 rounded-full mb-6 shadow-inner">
+          <Target className="w-8 h-8 text-teal-300" />
+        </div>
+        <h3 className="text-2xl font-bold mb-3 text-white">Our Mission</h3>
+        <p className="text-gray-400 leading-relaxed">
+            To foster technological innovation and professional growth by championing the core open-source principles of collaboration, transparency, and community-driven development.
+        </p>
+      </motion.div>
+
+      {/* Card 2: Our Vision (Highlighted) */}
+      <motion.div 
+        variants={itemVariant}
+        whileHover={{ y: -15, scale: 1.05, rotateX: 5, rotateY: 0 }}
+        transition={{ type: 'spring', stiffness: 300 }}
+        className="relative bg-white/10 backdrop-blur-lg p-8 rounded-2xl border border-teal-500/50 text-center flex flex-col items-center shadow-2xl cursor-pointer"
+        style={{ transformStyle: "preserve-3d" }}
+      >
+        {/* Glowing effect */}
+        <div className="absolute -inset-0.5 bg-gradient-to-r from-teal-600 to-sky-600 rounded-2xl blur opacity-30 group-hover:opacity-75 transition duration-1000"></div>
+        <div className="relative bg-gray-900/80 p-8 rounded-xl h-full flex flex-col items-center">
+            <div className="bg-gray-800 p-4 rounded-full mb-6 shadow-inner">
+                <Eye className="w-8 h-8 text-teal-300" />
+            </div>
+            <h3 className="text-2xl font-bold mb-3 text-white">Our Vision</h3>
+            <p className="text-gray-400 leading-relaxed">
+                To be the leading student organization that bridges the gap between academic learning and real-world industry practice, preparing students for successful careers in technology.
+            </p>
+        </div>
+      </motion.div>
+
+      {/* Card 3: Our Values */}
+      <motion.div 
+        variants={itemVariant} 
+        whileHover={{ y: -15, scale: 1.05, rotateX: 5, rotateY: 5 }}
+        transition={{ type: 'spring', stiffness: 300 }}
+        className="bg-white/5 backdrop-blur-lg p-8 rounded-2xl border border-white/10 text-center flex flex-col items-center shadow-lg cursor-pointer"
+        style={{ transformStyle: "preserve-3d" }}
+      >
+        <div className="bg-gray-800 p-4 rounded-full mb-6 shadow-inner">
+            <Award className="w-8 h-8 text-teal-300" />
+        </div>
+        <h3 className="text-2xl font-bold mb-3 text-white">Our Values</h3>
+        <p className="text-gray-400 leading-relaxed">
+            We believe in the power of community, the importance of transparency, and the freedom to innovate and share knowledge openly with everyone.
+        </p>
+      </motion.div>
+    </motion.div>
+  </div>
+</section>
+
+  {/* === RECENT UPDATES SECTION (with Action Buttons) === */}
+<section className="py-24 bg-gray-900">
+  <div className="container mx-auto px-6">
+    <motion.h2 
+      className="text-4xl font-bold text-center mb-16 text-white" 
+      initial={{ opacity: 0 }} 
+      whileInView={{ opacity: 1 }} 
+      viewport={{ once: true }}
+    >
+      Recent Updates
+    </motion.h2>
+
+    <motion.div 
+      className="grid grid-cols-1 md:grid-cols-3 gap-8"
+      variants={containerVariant}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true }}
+    >
+      {updates.map((update, i) => (
+        <motion.div 
+          key={i} 
+          variants={itemVariant}
+          whileHover={{ y: -8 }}
+          className="bg-gray-800 rounded-xl shadow-lg flex flex-col overflow-hidden group border border-gray-700/50"
+        >
+          {/* Image Container */}
+          <div className="overflow-hidden">
+            <img 
+              src={update.img} 
+              alt={update.title} 
+              className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+            />
+          </div>
+          
+          {/* Content Area */}
+          <div className="p-6 flex flex-col flex-grow">
+            <div>
+              <p className="text-sm text-gray-400 mb-1">{update.date}</p>
+              <h3 className="font-bold text-xl text-white">{update.title}</h3>
+            </div>
+            
+            {/* Button pushed to the bottom */}
+            <div className="mt-auto pt-6">
+              <a 
+                href={update.buttonLink}
+                className="bg-teal-500/10 text-teal-300 border border-teal-500/30 font-bold py-2 px-4 rounded-md hover:bg-teal-500 hover:text-white transition w-full block text-center"
+              >
+                {update.buttonText}
+              </a>
+            </div>
+          </div>
+        </motion.div>
+      ))}
+    </motion.div>
+  </div>
+</section>
+
+    {/* === UPCOMING EVENTS SECTION (IEEE Style) === */}
+<section id="events-section" className="py-24 bg-gray-900">
+    <div className="container mx-auto px-6">
+        <motion.h2 
+            className="text-4xl font-bold text-center mb-16 text-white" 
+            initial={{ opacity: 0 }} 
+            whileInView={{ opacity: 1 }} 
+            viewport={{ once: true }}
+        >
+            Upcoming Events
+        </motion.h2>
+
+        <motion.div 
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            variants={containerVariant}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+        >
+            {events.map((event, i) => (
+                <motion.div 
+                    key={i} 
+                    variants={itemVariant} 
+                    className="bg-gray-800 rounded-xl shadow-2xl flex flex-col overflow-hidden group border border-gray-700"
+                >
+                    {/* Event Image */}
+                    <div className="overflow-hidden">
+                        <img 
+                            src={event.img} 
+                            alt={event.title} 
+                            className="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-300"
+                        />
+                    </div>
+                    
+                    {/* Info Bar */}
+                    <div className="bg-gray-700 p-3 text-gray-300 text-xs flex flex-wrap gap-x-4 gap-y-2">
+                        <div className="flex items-center gap-1.5">
+                            <Calendar size={14} />
+                            <span>{event.date}</span>
+                        </div>
+                        <div className="flex items-center gap-1.5">
+                            <Clock size={14} />
+                            <span>{event.time}</span>
+                        </div>
+                    </div>
+                    <div className="bg-gray-700/50 p-3 text-gray-300 text-xs flex items-center gap-1.5 border-t border-gray-600/50">
+                        <MapPin size={14} />
+                        <span>{event.location}</span>
+                    </div>
+
+                    {/* Content Area */}
+                    <div className="p-6 flex flex-col flex-grow">
+                        <h3 className="text-2xl font-bold text-white mb-2">{event.title}</h3>
+                        <p className="text-gray-400 mb-6 flex-grow">{event.desc}</p>
+                        <a 
+                            href="#" 
+                            className="mt-auto bg-teal-500 text-white font-bold py-2 px-4 rounded-md hover:bg-teal-600 transition w-full block text-center"
+                        >
+                            Event Details
+                        </a>
+                    </div>
+                </motion.div>
             ))}
-          </motion.div>
-          <motion.div className="mt-16" initial={{opacity:0}} whileInView={{opacity:1}} viewport={{once:true}}>
-            <a href="/about" className="text-teal-400 font-semibold hover:text-white transition">View the Full Team →</a>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* === NEW SECTION 2: FEATURED PROJECT SHOWCASE === */}
-      <section className="py-24 bg-gray-800">
-        <div className="container mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
-          <motion.div className="text-center md:text-left" initial={{ x: -100, opacity: 0 }} whileInView={{ x: 0, opacity: 1 }} transition={{ duration: 0.8 }} viewport={{ once: true }}>
-            <span className="text-teal-400 font-semibold tracking-wider">FEATURED PROJECT</span>
-            <h2 className="text-4xl md:text-5xl font-bold my-4">UniVerse</h2>
-            <p className="text-gray-400 mb-6 text-lg">An open-source platform for university students to manage academic resources, track progress, and collaborate. Built by students, for students.</p>
-            <div className="flex flex-wrap gap-2 mb-8"><span className="bg-gray-700 text-teal-300 text-sm font-mono px-2 py-1 rounded">React</span><span className="bg-gray-700 text-teal-300 text-sm font-mono px-2 py-1 rounded">Node.js</span><span className="bg-gray-700 text-teal-300 text-sm font-mono px-2 py-1 rounded">MongoDB</span></div>
-            <a href="#" className="bg-teal-500 text-white font-bold py-3 px-8 rounded-full text-lg hover:bg-teal-600 transition transform hover:scale-105">View on GitHub</a>
-          </motion.div>
-          <motion.div initial={{ x: 100, opacity: 0 }} whileInView={{ x: 0, opacity: 1 }} transition={{ duration: 0.8 }} viewport={{ once: true }}>
-            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1470&q=80" alt="Dashboard analytics" className="rounded-lg shadow-2xl"/>
-          </motion.div>
-        </div>
-      </section>
+        </motion.div>
+    </div>
+</section>
       
-      {/* 4. EVENT SPOTLIGHT SECTION */}
-      <section className="py-24 bg-gray-900">
-        <div className="container mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
-          <motion.div className="order-2 md:order-1" initial={{x: -100, opacity: 0}} whileInView={{x: 0, opacity: 1}} transition={{duration: 0.8}} viewport={{once: true}}><img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1632&q=80" alt="People collaborating at a tech event" className="rounded-lg shadow-2xl"/></motion.div>
-          <motion.div className="order-1 md:order-2 text-center md:text-left" initial={{x: 100, opacity: 0}} whileInView={{x: 0, opacity: 1}} transition={{duration: 0.8}} viewport={{once: true}}><span className="text-teal-400 font-semibold tracking-wider">UPCOMING EVENT</span><h2 className="text-4xl md:text-5xl font-bold my-4">Cloud Native Day '24</h2><p className="text-gray-400 mb-6 text-lg">Dive into the world of Kubernetes, Docker, and cloud technologies with a full day of talks and hands-on labs.</p><div className="text-3xl font-mono text-white mb-8"><span>24d : 18h : 05m</span></div><a href="/events/cloud-native-day-24" className="bg-teal-500 text-white font-bold py-3 px-8 rounded-full text-lg hover:bg-teal-600 transition transform hover:scale-105">Event Details</a></motion.div>
-        </div>
-      </section>
+{/* 5. NEW TESTIMONIALS SLIDER SECTION */}
+<TestimonialSlider testimonials={testimonials} />
 
-      {/* 5. LATEST BLOG POSTS SECTION */}
+      {/* 6. NEW MEET OUR TEAMS SECTION */}
       <section className="py-24 bg-gray-800">
-        <div className="container mx-auto px-6">
-          <motion.h2 className="text-4xl font-bold text-center mb-16 text-white" initial={{y: 50, opacity: 0}} whileInView={{y: 0, opacity: 1}} transition={{duration: 0.5}} viewport={{once: true}}>From Our Knowledge Base</motion.h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <motion.div whileHover={{ y: -10 }} className="bg-gray-900 rounded-lg overflow-hidden shadow-lg" initial={{opacity: 0, y: 50}} whileInView={{opacity: 1, y: 0}} viewport={{once: true, amount: 0.5}}><img src="https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?auto=format&fit=crop&w=1470&q=80" alt="Git and GitHub" className="w-full h-56 object-cover" /><div className="p-6"><h3 className="font-bold text-xl mb-2 text-white">Mastering Git & GitHub</h3><p className="text-gray-400 text-base mb-4">A beginner's guide to version control that every developer needs.</p><a href="#" className="font-semibold text-teal-400 hover:text-teal-300">Read More →</a></div></motion.div>
-            <motion.div whileHover={{ y: -10 }} className="bg-gray-900 rounded-lg overflow-hidden shadow-lg" initial={{opacity: 0, y: 50}} whileInView={{opacity: 1, y: 0}} transition={{delay: 0.2}} viewport={{once: true, amount: 0.5}}><img src="https://images.unsplash.com/photo-1599658880436-c61792e70672?auto=format&fit=crop&w=1470&q=80" alt="Linux Terminal" className="w-full h-56 object-cover" /><div className="p-6"><h3 className="font-bold text-xl mb-2 text-white">Why You Should Learn Linux</h3><p className="text-gray-400 text-base mb-4">Unlock the power of the command line and understand the backbone of the internet.</p><a href="#" className="font-semibold text-teal-400 hover:text-teal-300">Read More →</a></div></motion.div>
-            <motion.div whileHover={{ y: -10 }} className="bg-gray-900 rounded-lg overflow-hidden shadow-lg" initial={{opacity: 0, y: 50}} whileInView={{opacity: 1, y: 0}} transition={{delay: 0.4}} viewport={{once: true, amount: 0.5}}><img src="https://images.unsplash.com/photo-1593720213428-28a5b9e94613?auto=format&fit=crop&w=1470&q=80" alt="React code" className="w-full h-56 object-cover" /><div className="p-6"><h3 className="font-bold text-xl mb-2 text-white">Intro to Modern Web Dev</h3><p className="text-gray-400 text-base mb-4">A look into the React ecosystem and how to build modern web applications.</p><a href="#" className="font-semibold text-teal-400 hover:text-teal-300">Read More →</a></div></motion.div>
+        <div className="container mx-auto px-6 text-center">
+          <motion.h2 className="text-4xl font-bold mb-4 text-white" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>Meet Our Core Teams</motion.h2>
+          <motion.p className="text-lg text-gray-400 max-w-2xl mx-auto mb-12" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>The passionate individuals who drive our community forward with dedication and innovation.</motion.p>
+          <div className="flex justify-center space-x-2 md:space-x-4 mb-8">
+            <button onClick={() => setActiveTeamTab('Leadership')} className={`px-4 py-2 rounded-md font-semibold transition ${activeTeamTab === 'Leadership' ? 'bg-teal-500 text-white' : 'bg-gray-700 text-gray-300'}`}>Leadership</button>
+            <button onClick={() => setActiveTeamTab('Coordinating')} className={`px-4 py-2 rounded-md font-semibold transition ${activeTeamTab === 'Coordinating' ? 'bg-teal-500 text-white' : 'bg-gray-700 text-gray-300'}`}>Coordinating</button>
+            <button onClick={() => setActiveTeamTab('Technical')} className={`px-4 py-2 rounded-md font-semibold transition ${activeTeamTab === 'Technical' ? 'bg-teal-500 text-white' : 'bg-gray-700 text-gray-300'}`}>Technical</button>
+            <button onClick={() => setActiveTeamTab('Design')} className={`px-4 py-2 rounded-md font-semibold transition ${activeTeamTab === 'Design' ? 'bg-teal-500 text-white' : 'bg-gray-700 text-gray-300'}`}>Design</button>
+          </div>
+          <div>
+            {activeTeamTab === 'Leadership' && <TeamGrid teamData={leadershipTeam} />}
+            {activeTeamTab === 'Coordinating' && <TeamGrid teamData={coordinatingTeam} />}
+            {activeTeamTab === 'Technical' && <TeamGrid teamData={technicalTeam} />}
+            {activeTeamTab === 'Design' && <TeamGrid teamData={designTeam} />}
           </div>
         </div>
       </section>
 
-      {/* === NEW SECTION 3: GLIMPSE OF OUR GALLERY === */}
-      <section className="py-24 bg-gray-900">
+      {/* 7. TECHNOLOGY CHAPTERS SECTION */}
+      <section id="chapters-section" className="py-24 bg-gray-900">
         <div className="container mx-auto px-6 text-center">
-            <motion.h2 className="text-4xl font-bold mb-16 text-white" initial={{opacity:0}} whileInView={{opacity:1}} viewport={{once: true}}>Community Moments</motion.h2>
-            <motion.div className="grid grid-cols-2 md:grid-cols-4 gap-4" variants={containerVariant} initial="hidden" whileInView="visible" viewport={{once: true}}>
-                {galleryImages.map((src, index) => (
-                    <motion.div key={index} variants={itemVariant} className="overflow-hidden rounded-lg">
-                        <img src={src} alt={`Gallery image ${index + 1}`} className="w-full h-full object-cover transform hover:scale-110 transition-transform duration-500" />
-                    </motion.div>
-                ))}
+          <motion.h2 className="text-4xl font-bold mb-4 text-white" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>Our Technology Chapters</motion.h2>
+          <motion.p className="text-lg text-gray-400 max-w-3xl mx-auto mb-16" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>Explore our specialized chapters that focus on different areas of technology.</motion.p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            {chapters.map((chapter, i) => (<motion.div key={i} className="bg-gray-800 p-8 rounded-lg shadow-lg" initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}><div className="text-5xl mb-4">{chapter.icon}</div><h3 className="font-bold text-xl text-white mb-2">{chapter.name}</h3><p className="text-sm text-gray-400">{chapter.desc}</p></motion.div>))}
+          </div>
+        </div>
+      </section>
+      
+      {/* 8. BLOG SECTION */}
+      <section id="blog-section" className="py-24 bg-gray-800">
+        <div className="container mx-auto px-6">
+          <motion.h2 className="text-4xl font-bold text-center mb-16 text-white" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>From Our Knowledge Base</motion.h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {blogPosts.map((post, i) => (<motion.div key={post.slug} whileHover={{ y: -10 }} className="bg-gray-900 rounded-lg overflow-hidden shadow-lg" initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.1 }} viewport={{ once: true }}><a href="#"><img src={post.img} alt={post.title} className="w-full h-56 object-cover" /><div className="p-6"><h3 className="font-bold text-xl mb-2 text-white">{post.title}</h3></div></a></motion.div>))}
+          </div>
+        </div>
+      </section>
+
+      {/* 9. GALLERY SECTION */}
+      <section id="gallery-section" className="py-24 bg-gray-900">
+        <div className="container mx-auto px-6 text-center">
+            <motion.h2 className="text-4xl font-bold mb-16 text-white" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>Community in Action</motion.h2>
+            <motion.div className="grid grid-cols-2 md:grid-cols-4 gap-4" variants={containerVariant} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+                {galleryImages.map((src, i) => (<motion.div key={i} variants={itemVariant} className="overflow-hidden rounded-lg"><img src={src} alt="" className="w-full h-full object-cover transform hover:scale-110 transition-transform" /></motion.div>))}
             </motion.div>
         </div>
       </section>
-
-      {/* 6. PARTNERS & SUPPORTERS SECTION */}
-      <section className="py-20 bg-gray-800">
-        <div className="container mx-auto px-6 text-center">
-          <motion.h2 className="text-3xl font-bold text-white mb-12" initial={{opacity: 0}} whileInView={{opacity: 1}} viewport={{once: true}}>Proudly Supported By</motion.h2>
-          <motion.div className="flex flex-wrap justify-center items-center gap-x-16 gap-y-8" variants={containerVariant} initial="hidden" whileInView="visible" viewport={{once: true}}>
-            <motion.div variants={itemVariant} className="text-gray-400 text-xl font-semibold grayscale hover:grayscale-0 transition-all">University of Uva Wellassa</motion.div>
-            <motion.div variants={itemVariant} className="text-gray-400 text-xl font-semibold grayscale hover:grayscale-0 transition-all">Dept. of Computer Science</motion.div>
-            <motion.div variants={itemVariant} className="text-gray-400 text-xl font-semibold grayscale hover:grayscale-0 transition-all">GitHub</motion.div>
-            <motion.div variants={itemVariant} className="text-gray-400 text-xl font-semibold grayscale hover:grayscale-0 transition-all">DigitalOcean</motion.div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* 7. FINAL CALL TO ACTION SECTION */}
-      <section className="bg-gray-900">
-        <div className="container mx-auto px-6 py-20 text-center">
-          <motion.h2 className="text-4xl font-bold text-white mb-4" initial={{opacity: 0, y: -20}} whileInView={{opacity: 1, y: 0}} transition={{duration: 0.5}} viewport={{once: true}}>Ready to Build the Future?</motion.h2>
-          <motion.p className="text-gray-300 text-lg max-w-2xl mx-auto mb-8" initial={{opacity: 0, y: 20}} whileInView={{opacity: 1, y: 0}} transition={{duration: 0.5}} viewport={{once: true}}>Join a network of passionate developers and creators. Your next big idea starts here. There's no cost to join, only opportunities to grow.</motion.p>
-          <motion.div initial={{scale: 0.8, opacity: 0}} whileInView={{scale: 1, opacity: 1}} transition={{duration: 0.5}} viewport={{once: true}}>
-            <a href="/join" className="bg-teal-500 text-white font-bold py-4 px-10 rounded-full text-xl hover:bg-teal-600 transition transform hover:scale-105 shadow-lg">Become a Member</a>
+      
+      {/* 10. JOIN US CTA */}
+      <section id="join-us-section" className="relative py-24 bg-fixed bg-center bg-cover" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1471&q=80')" }}>
+        <div className="absolute inset-0 bg-black/70"></div>
+        <div className="relative container mx-auto px-6 text-center">
+          <motion.h2 className="text-3xl font-bold text-white mb-4" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>Ready to Join Our Community?</motion.h2>
+          <motion.p className="text-gray-300 max-w-2xl mx-auto mb-8" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>Become a member and unlock opportunities to grow, learn, and connect with professionals across all our specialized chapters.</motion.p>
+          <motion.div initial={{ scale: 0.9, opacity: 0 }} whileInView={{ scale: 1, opacity: 1 }} viewport={{ once: true }}>
+            <a href="https://forms.gle/your_google_form_link" target="_blank" rel="noopener noreferrer" className="bg-teal-500 text-white font-bold py-3 px-8 rounded-full text-lg hover:bg-teal-600 transition">Join Now - It's Free</a>
           </motion.div>
         </div>
       </section>
