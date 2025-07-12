@@ -23,25 +23,13 @@ import misalRanasinghe from '../assets/images/xcom/Nisal Ranasinghe.jpeg';
 import raeesAhamed from '../assets/images/xcom/Raees Ahamed.jpg';
 import tharinduDevinda from '../assets/images/xcom/Tharindu devinda.jpg';
 import nilakshanRaveendran from '../assets/images/xcom/NILAKSHAN R..jpg';
-
-
-
-
-
-
-
 import heroVideo from '../assets/videos/video1.mp4';
 
 import {  Camera } from 'lucide-react';
-
-
 import { Target, Eye, Award } from 'lucide-react';
-// --- Animation Variants ---
+
 const containerVariant = { hidden: { opacity: 0 }, visible: { opacity: 1, transition: { staggerChildren: 0.15 } } };
 const itemVariant = { hidden: { y: 20, opacity: 0 }, visible: { y: 0, opacity: 1, transition: { type: 'spring', stiffness: 100 } } };
-
-// --- Data for All Sections ---
-// --- UPDATE THIS DATA ARRAY IN HomePage.jsx ---
 
 const updates = [
     { 
