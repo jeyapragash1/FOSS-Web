@@ -3,8 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { TypeAnimation } from 'react-type-animation';
 import { Link } from 'react-scroll';
 import { ChevronLeft, ChevronRight, Quote, Calendar, Clock, MapPin } from 'lucide-react';
-// import { Code, Users, BookOpen, ShieldCheck, Sparkles, Freedom } from 'lucide-react';
-// CORRECTED IMPORT
+
 import { Code, Users, BookOpen, ShieldCheck, Sparkles, Key } from 'lucide-react';
 import TestimonialSlider from '../components/TestimonialSlider';
 
@@ -24,6 +23,49 @@ import raeesAhamed from '../assets/images/xcom/Tresu/Raees Ahamed.jpg';
 import tharinduDevinda from '../assets/images/xcom/Tresu/Tharindu devinda.jpg';
 import nilakshanRaveendran from '../assets/images/xcom/Des/NILAKSHAN R..jpg';
 import bhagyaLakshan from '../assets/images/xcom/Mar/MADHUSHANKA R.M.B.L..jpg';
+
+// --- JUNIOR COMMITTEE IMAGE IMPORTS (CORRECTED & VERIFIED) ---
+
+// Design Team
+import kavisanaKanthavanesan from '../assets/images/jxcom/Design/KANTHAVANESAN K.jpeg';
+import sajithNuski from '../assets/images/jxcom/Design/M.N.M.S. Nuski.jpg';
+import fathimaNuha from '../assets/images/jxcom/Design/NUHA M.N.F.jpg';
+import quintusJonath from '../assets/images/jxcom/Design/Q. Jonath.jpg';
+import sasinduSandeepa from '../assets/images/jxcom/Design/sasindu sandeepa.jpeg';
+
+// Event Coordinator Team
+import sanduniAyeshika from '../assets/images/jxcom/Ev-Co-T/A.M.S.A. Jayawardhana.jpg';
+import chathuriDhananjana from '../assets/images/jxcom/Ev-Co-T/Chathuri Paththamperuma.jpg';
+import rameshaDeshan from '../assets/images/jxcom/Ev-Co-T/DESHAN K.M.V.R.jpg';
+import inukaKavinda from '../assets/images/jxcom/Ev-Co-T/KAVINDA K.G.I.jpg'; // Corrected path
+import thanarajanVidhushika from '../assets/images/jxcom/Ev-Co-T/T.VIDUSHIKA.jpg';
+
+// Marketing Team
+import kirushikaThavanesan from '../assets/images/jxcom/Market/K. Thavanesan.jpg';
+import binushiNayanathara from '../assets/images/jxcom/Market/M.B. Nayanathara.jpg';
+
+// Secretary Team
+import ajmalKhanAfrin from '../assets/images/jxcom/Sec/JEEHAN A.K.A.jpg';
+import sureshkumarNogini from '../assets/images/jxcom/Sec/S. Nogini.jpg';
+import nimmaniWickramarathna from '../assets/images/jxcom/Sec/WICKRAMARATHNA H.K.N..jpeg';
+
+// Technical Team
+import jayasundara from '../assets/images/jxcom/Technical/JAYASUNDARA J.A.D.T.D.W.jpeg';
+import probathSanjeewa from '../assets/images/jxcom/Technical/LIYANAGE P.S.jpg';
+import sayuruMalshan from '../assets/images/jxcom/Technical/MALSHAN K.K.S.jpg';
+import nayanaNeranjana from '../assets/images/jxcom/Technical/Nayana JAYAWICKRAMA.jpg';
+import theekshanaPeiris from '../assets/images/jxcom/Technical/nilesh theekshana.jpg';
+import chirathChalana from '../assets/images/jxcom/Technical/PIYUMIKA W.C.C.jpg';
+import makiliniThelvarasa from '../assets/images/jxcom/Technical/T. Makilini.jpg';
+
+// WIF Core Members
+import ashaJaneshwari from '../assets/images/jxcom/WIF/Asha Janeshwari.jpg';
+import balasooriyaAvindi from '../assets/images/jxcom/WIF/B.L.A.R. Balasooriya.jpg';
+import geekiyanageDevindi from '../assets/images/jxcom/WIF/JAYAWEERA G.D.U.jpeg';
+import kanishkaRatnakumar from '../assets/images/jxcom/WIF/K. Ratnakumar.jpg';
+import galabodageThakshila from '../assets/images/jxcom/WIF/Nawodya Galabodage.jpg';
+import himaliThennakoon from '../assets/images/jxcom/WIF/THENNAKOON T.M.T.G.H.M..jpeg';
+
 
 import heroVideo from '../assets/videos/v3.mp4';
 
@@ -85,11 +127,9 @@ const events = [
     },
 ];
 
-// --- REPLACE your old team data with this in HomePage.jsx ---
+// --- COMPLETE TEAM DATA (Executive & Junior Committees) ---
 
-// --- REPLACE your old executiveCommittee data with this in HomePage.jsx ---
-
-// --- CORRECTED & RE-ORDERED EXECUTIVE COMMITTEE DATA ---
+// --- CORRECTED EXECUTIVE COMMITTEE DATA ARRAY ---
 
 const executiveCommittee = [
   // Core Leadership
@@ -100,73 +140,84 @@ const executiveCommittee = [
   { name: 'Tharindu Devinda', role: 'Assistant Treasurer', img: tharinduDevinda },
   
   // Team Leads
+  { name: 'Isuri Manodya', role: 'Public Relations Lead', img: isuriManodya }, // This is the corrected line
   { name: 'Bhagya Lakshan', role: 'Marketing & Publicity Lead', img: bhagyaLakshan },
-  { name: 'Isuri Manodya', role: 'Public Relations Lead', img: isuriManodya },
   { name: 'Kasun Janith Bandara', role: 'Event Coordinator', img: kasunJahith },
   { name: 'Kavinda Chamod', role: 'Membership & Recruit Lead', img: Kavinda },
   { name: 'Chamodya Perera', role: 'Membership & Recruit Lead', img: Chamodya },
   { name: 'Kisho Jeyapragash', role: 'Technical Manager', img: kishoJeyapragash },
-    { name: 'Thinuja Hettiarachchi', role: 'Technical Manager', img: thinujaHettiarachchi },
+  { name: 'Thinuja Hettiarachchi', role: 'Technical Manager', img: thinujaHettiarachchi },
   { name: 'Misal Ranasinghe', role: 'Design Lead', img: misalRanasinghe },
   { name: 'Nilakshan Raveendran', role: 'Design Lead', img: nilakshanRaveendran },
   { name: 'Hasini Sarathchandra', role: 'Design Lead - WIF', img: hasini },
 ];
 
-const coordinatingTeam = [
-    { name: 'Imasha Vithanage', role: 'Lead UI/UX Designer', img: 'https://images.unsplash.com/photo-1554151228-14d9def656e4?auto=format&fit=crop&w=400&q=80' },
-    { name: 'Praveen Jayasuriya', role: 'Graphic Designer', img: 'https://images.unsplash.com/photo-1599566150163-29194dcaad36?auto=format&fit=crop&w=400&q=80' },
-    { name: 'Nethmi Silva', role: 'Event Coordinator', img: 'https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?auto=format&fit=crop&w=400&q=80' },
-    { name: 'Kavindu Perera', role: 'Partnerships Lead', img: 'https://images.unsplash.com/photo-1629425733761-caae3b5f2e50?auto=format&fit=crop&w=400&q=80' },
-    { name: 'Fathima Rushdha', role: 'Social Media Manager', img: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80' },
-    { name: 'Nethmi Silva', role: 'Event Coordinator', img: 'https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?auto=format&fit=crop&w=400&q=80' },
-    { name: 'Kavindu Perera', role: 'Partnerships Lead', img: 'https://images.unsplash.com/photo-1629425733761-caae3b5f2e50?auto=format&fit=crop&w=400&q=80' },
-    { name: 'Fathima Rushdha', role: 'Social Media Manager', img: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80' },
+const juniorTechnicalTeam = [
+    { name: 'Makilini Thelvarasa', img: makiliniThelvarasa },
+    { name: 'Sayuru Malshan', img: sayuruMalshan },
+    { name: 'J.A.D.T.D.W Jayasundara', img: jayasundara },
+    { name: 'Seelagama Nilesh Theekshana Peiris', img: theekshanaPeiris },
+    { name: 'Probath Sanjeewa Liyanage', img: probathSanjeewa },
+    { name: 'Nayana Neranjana Jayawickrama', img: nayanaNeranjana },
+    { name: 'Chirath Chalana Piyumika', img: chirathChalana },
+];
 
-  ];
-const technicalTeam = [
-    { name: 'Imasha Vithanage', role: 'Lead UI/UX Designer', img: 'https://images.unsplash.com/photo-1554151228-14d9def656e4?auto=format&fit=crop&w=400&q=80' },
-    { name: 'Praveen Jayasuriya', role: 'Graphic Designer', img: 'https://images.unsplash.com/photo-1599566150163-29194dcaad36?auto=format&fit=crop&w=400&q=80' },
-    { name: 'Nethmi Silva', role: 'Event Coordinator', img: 'https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?auto=format&fit=crop&w=400&q=80' },
-    { name: 'Kavindu Perera', role: 'Partnerships Lead', img: 'https://images.unsplash.com/photo-1629425733761-caae3b5f2e50?auto=format&fit=crop&w=400&q=80' },
-    { name: 'Fathima Rushdha', role: 'Social Media Manager', img: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80' },
-    { name: 'Nethmi Silva', role: 'Event Coordinator', img: 'https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?auto=format&fit=crop&w=400&q=80' },
-    { name: 'Kavindu Perera', role: 'Partnerships Lead', img: 'https://images.unsplash.com/photo-1629425733761-caae3b5f2e50?auto=format&fit=crop&w=400&q=80' },
-    { name: 'Fathima Rushdha', role: 'Social Media Manager', img: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80' },
+const juniorMarketingTeam = [
+    { name: 'Kirushika Thavanesan', img: kirushikaThavanesan },
+    { name: 'Madurapperumage Binushi Nayanathara', img: binushiNayanathara },
+];
 
-  ];
-// const designTeam = [
-//     { name: 'Imasha Vithanage', role: 'Lead UI/UX Designer', img: 'https://images.unsplash.com/photo-1554151228-14d9def656e4?auto=format&fit=crop&w=400&q=80' },
-//     { name: 'Praveen Jayasuriya', role: 'Graphic Designer', img: 'https://images.unsplash.com/photo-1599566150163-29194dcaad36?auto=format&fit=crop&w=400&q=80' },
-//     { name: 'Nethmi Silva', role: 'Event Coordinator', img: 'https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?auto=format&fit=crop&w=400&q=80' },
-//     { name: 'Kavindu Perera', role: 'Partnerships Lead', img: 'https://images.unsplash.com/photo-1629425733761-caae3b5f2e50?auto=format&fit=crop&w=400&q=80' },
-//     { name: 'Fathima Rushdha', role: 'Social Media Manager', img: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80' },
-//     { name: 'Nethmi Silva', role: 'Event Coordinator', img: 'https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?auto=format&fit=crop&w=400&q=80' },
-//     { name: 'Kavindu Perera', role: 'Partnerships Lead', img: 'https://images.unsplash.com/photo-1629425733761-caae3b5f2e50?auto=format&fit=crop&w=400&q=80' },
-//     { name: 'Fathima Rushdha', role: 'Social Media Manager', img: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80' },
+const juniorEventCoordinatorTeam = [
+    { name: 'Inuka Kavinda', img: inukaKavinda },
+    { name: 'Sanduni Ayeshika Jayawardhana', img: sanduniAyeshika },
+    { name: 'Ramesha Deshan', img: rameshaDeshan },
+    { name: 'Paththamperuma Arachchige Chathuri Dhananjana', img: chathuriDhananjana },
+    { name: 'Thanarajan Vidhushika', img: thanarajanVidhushika },
+];
 
+const juniorSecretaryTeam = [
+    { name: 'Haputhanthirige Kaveesha Nimmani Wickramarathna', img: nimmaniWickramarathna },
+    { name: 'Sureshkumar Nogini', img: sureshkumarNogini },
+    { name: 'Ajmal Khan Afrin Jeehan', img: ajmalKhanAfrin },
+];
 
-//   ];
+const juniorDesignTeam = [
+    { name: 'Mohamed Nasartheen Mohamed Sajith Nuski', img: sajithNuski },
+    { name: 'Galle Jayawickrama Sasindu Sandeepa', img: sasinduSandeepa },
+    { name: 'Fathima Nuha Nazardeen', img: fathimaNuha },
+    { name: 'Kavisana Kanthavanesan', img: kavisanaKanthavanesan },
+    { name: 'Quintus Jonath', img: quintusJonath },
+];
+
+const wifCoreTeam = [
+    { name: 'Balasooriya Lekamlage Avindi Rashara Balasooriya', img: balasooriyaAvindi },
+    { name: 'Geekiyanage Devindi Uthpala Jayaweera', img: geekiyanageDevindi },
+    { name: 'Kanishka Ratnakumar', img: kanishkaRatnakumar },
+    { name: 'Galabodagedra Thakshila Nawodya Galabodage', img: galabodageThakshila },
+    { name: 'Himali Maheshika Thennakoon', img: himaliThennakoon },
+    { name: 'Loku Thambugalage Asha Janeshwari', img: ashaJaneshwari },
+];
 
 // --- UPDATE THIS DATA ARRAY IN HomePage.jsx ---
 
 const testimonials = [
     { 
-        quote: "Joining FOSS was the best decision of my university life. I learned Git and contributed to a real project in my first semester.", 
-        name: 'Nimali Perera', 
+        quote: "In the FOSS community, I found more than skills. I found support, purpose, and people who truly care.", 
+        name: 'Sachindu Kavishka', 
         role: '3rd Year, Computer Science', 
-        img: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=400&q=80' 
+        img: sachinduKavishka
     },
     { 
-        quote: "The workshops are top-notch. The Docker session clarified so many complex concepts. The community is incredibly supportive.", 
-        name: 'Sahan Rathnayake', 
-        role: '2nd Year, Engineering Tech', 
-        img: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=400&q=80' 
+        quote: "The FOSS community is where freedom meets code, and strangers become collaborators. It’s not just about software. it’s about shaping the future, together.", 
+        name: 'Kisho Jeyapragash', 
+        role: '3rd Year, IIT', 
+        img: kishoJeyapragash 
     },
     { 
-        quote: "I met my hackathon team and future project partners through FOSS. It's more than a club; it's a network that pushes you.", 
-        name: 'Fathima Rizwan', 
-        role: '4th Year, Computer Science', 
-        img: 'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=400&q=80' 
+        quote: "I think the FOSS community feels like a global team with a shared dream open, accessible technology for all.", 
+        name: 'Rashmi Ruwanthika', 
+        role: '3rd Year, Computer Science', 
+        img: rashmiRuwanthika
     },
 ];
 
@@ -177,7 +228,7 @@ const chapters = [
     { name: 'Systems & DevOps', icon: '🐧', desc: 'Working with Linux, shell scripting, containerization, and automation.' },
 ];
 
-// --- UPDATE THIS DATA ARRAY IN HomePage.jsx ---
+
 
 const blogPosts = [
     { 
@@ -241,68 +292,40 @@ const TeamGrid = ({ teamData }) => (
     </motion.div>
 );
 
-const HomePage = () => {
-  const [activeTeamTab, setActiveTeamTab] = useState('Leadership');
-  const [currentTestimonial, setCurrentTestimonial] = useState(0);
-
-  const nextTestimonial = () => setCurrentTestimonial(prev => (prev === testimonials.length - 1 ? 0 : prev + 1));
-  const prevTestimonial = () => setCurrentTestimonial(prev => (prev === 0 ? testimonials.length - 1 : prev - 1));
-
-  return (
-    <div className="bg-gray-900 text-white">
-    {/* === 1. HERO SECTION (with Video Background) === */}
-<section id="hero-section" className="relative flex items-center justify-center h-screen text-center overflow-hidden">
-  
-  {/* The Video Background Layer */}
-  <video 
-    src={heroVideo} 
-    autoPlay 
-    loop 
-    muted 
-    playsInline
-    className="absolute top-0 left-0 w-full h-full object-cover z-0"
-  >
-    Your browser does not support the video tag.
-  </video>
-
-  {/* The Darkening Overlay for Text Readability */}
-  <div className="absolute inset-0 bg-black/60 z-10"></div>
-
-  {/* The Content Layer */}
-  <motion.div 
-    className="relative z-20" 
-    initial={{ opacity: 0 }} 
-    animate={{ opacity: 1 }} 
-    transition={{ duration: 0.5 }}
-  >
-    <motion.p 
-      className="text-3xl md:text-5xl text-teal-300 tracking-widest uppercase" 
-      initial={{ opacity: 0 }} 
-      animate={{ opacity: 1 }} 
-      transition={{ duration: 1, delay: 0.5 }}
-    >
-      Welcome To
-    </motion.p>
-    
-    <TypeAnimation 
-      sequence={[1000, 'FOSS Uva Wellassa University']} 
-      wrapper="h1" 
-      speed={50} 
-      cursor={true} 
-      className="text-5xl md:text-7xl font-extrabold text-white my-4" 
-    />
-    
-    <motion.p 
-      className="text-lg md:text-3xl text-gray-200" 
-      initial={{ opacity: 0 }} 
-      animate={{ opacity: 1 }} 
-      transition={{ duration: 1, delay: 3.5 }}
-    >
-      The Free And Open Source Software Community
-    </motion.p>
+// Helper component for Junior Committee subgroups
+const TeamSubgroup = ({ title, members }) => (
+  <motion.div className="mb-20" initial="hidden" whileInView="visible" variants={containerVariant} viewport={{ once: true }}>
+    <motion.h3 variants={itemVariant} className="text-3xl font-bold text-teal-400 mb-10 border-b-2 border-gray-700 pb-4 inline-block tracking-wider">
+      {title}
+    </motion.h3>
+    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-7 gap-x-8 gap-y-12">
+      {members.map((member, i) => (
+        <motion.div key={i} variants={itemVariant} className="text-center flex flex-col items-center group">
+          <motion.div whileHover={{ scale: 1.1, y: -10 }} transition={{ type: 'spring', stiffness: 300 }} className="relative w-28 h-28 md:w-32 md:h-32 mb-4">
+            <div className="absolute inset-0 bg-teal-500 rounded-full blur-md opacity-0 group-hover:opacity-40 transition-opacity duration-300"></div>
+            <img src={member.img} alt={member.name} className="relative w-full h-full rounded-full object-cover border-4 border-gray-700 group-hover:border-teal-400 transition-colors duration-300" />
+          </motion.div>
+          <h4 className="font-semibold text-white">{member.name}</h4>
+          {member.role && <p className="text-sm text-gray-500">{member.role}</p>}
+        </motion.div>
+      ))}
+    </div>
   </motion.div>
-  
-</section>
+);
+
+const HomePage = () => {
+  return (
+    <div className="digital-lines-background text-white">
+      {/* 1. HERO SECTION */}
+      <section id="hero-section" className="relative flex items-center justify-center h-screen text-center overflow-hidden">
+        <video src={heroVideo} autoPlay loop muted playsInline className="absolute top-0 left-0 w-full h-full object-cover z-0" />
+        <div className="absolute inset-0 bg-black/60 z-10"></div>
+        <motion.div className="relative z-20" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
+          <motion.p className="text-lg md:text-xl text-teal-300 tracking-widest uppercase" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1, delay: 0.5 }}>Welcome To</motion.p>
+          <TypeAnimation sequence={[1000, 'FOSS Uva Wellassa University']} wrapper="h1" speed={50} cursor={true} className="text-5xl md:text-7xl font-extrabold text-white my-4" />
+          <motion.p className="text-lg md:text-xl text-gray-200" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1, delay: 3.5 }}>The Free And Open Source Software Community</motion.p>
+        </motion.div>
+      </section>
 
 {/* === WHO WE ARE SECTION (Ultimate FOSS Style) === */}
 <section id="about-section" className="py-24 bg-gray-900 overflow-hidden">
@@ -433,66 +456,50 @@ We build open, inclusive technology together. Our community welcomes everyone, v
   </div>
 </section>
       
-
-{/* === MEET OUR EXECUTIVE COMMITTEE & TEAM LEADS === */}
-<section id="about-section" className="py-24 bg-gray-900/95 backdrop-blur-sm">
+ {/* === MEET OUR TEAM (Executive & Junior Committees) === */}
+<section id="team-section" className="py-24 bg-gray-900/95 backdrop-blur-sm">
   <div className="container mx-auto px-6 text-center">
     
-    {/* Section Header */}
-    <motion.h2 
-      className="text-4xl md:text-5xl font-bold text-white" 
-      initial={{ opacity: 0 }} 
-      whileInView={{ opacity: 1 }} 
-      viewport={{ once: true }}
-    >
-      Executive Committee & Team Leads
-    </motion.h2>
-    
-    <motion.p 
-      className="text-lg text-gray-400 max-w-2xl mx-auto mt-4 mb-16" 
-      initial={{ opacity: 0 }} 
-      whileInView={{ opacity: 1 }} 
-      viewport={{ once: true }}
-      transition={{ delay: 0.2 }}
-    >
-      The passionate individuals who drive our community forward with dedication and innovation.
-    </motion.p>
-
-    {/* Team Grid */}
-    <motion.div 
-      className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-8 gap-y-12 justify-center"
-      variants={containerVariant}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true }}
-    >
-      {executiveCommittee.map((member, i) => (
-        <motion.div 
-          key={i} 
-          variants={itemVariant}
-          className="text-center flex flex-col items-center group"
-        >
-          {/* The image with glowing border effect */}
-          <motion.div 
-            whileHover={{ scale: 1.1, y: -10 }}
-            transition={{ type: 'spring', stiffness: 300 }}
-            className="relative w-32 h-32 md:w-36 md:h-36 mb-4"
-          >
-            {/* The subtle background glow */}
-            <div className="absolute inset-0 bg-teal-500 rounded-full blur-lg opacity-0 group-hover:opacity-50 transition-opacity duration-300"></div>
-            
-            <img 
-              src={member.img} 
-              alt={member.name} 
-              className="relative w-full h-full rounded-full object-cover border-4 border-gray-700 group-hover:border-teal-400 transition-colors duration-300" 
-            />
+    {/* --- EXECUTIVE COMMITTEE --- */}
+    <div className="mb-24">
+      <motion.h2 className="text-4xl md:text-5xl font-bold text-white" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
+        Executive Committee
+      </motion.h2>
+      <motion.p className="text-lg text-gray-400 max-w-2xl mx-auto mt-4 mb-16" initial={{ opacity: 0 }} whileInView={{ opacity: 1, delay: 0.2 }} viewport={{ once: true }}>
+        The passionate individuals who drive our community forward with dedication and innovation.
+      </motion.p>
+      <motion.div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-8 gap-y-12 justify-center" variants={containerVariant} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+        {executiveCommittee.map((member, i) => (
+          <motion.div key={i} variants={itemVariant} className="text-center flex flex-col items-center group">
+            <motion.div whileHover={{ scale: 1.1, y: -10 }} transition={{ type: 'spring', stiffness: 300 }} className="relative w-32 h-32 md:w-36 md:h-36 mb-4">
+              <div className="absolute inset-0 bg-teal-500 rounded-full blur-lg opacity-0 group-hover:opacity-50 transition-opacity duration-300"></div>
+              <img src={member.img} alt={member.name} className="relative w-full h-full rounded-full object-cover border-4 border-gray-700 group-hover:border-teal-400 transition-colors duration-300" />
+            </motion.div>
+            <h3 className="font-bold text-lg md:text-xl text-white">{member.name}</h3>
+            <p className="text-gray-400">{member.role}</p>
           </motion.div>
-          
-          <h3 className="font-bold text-lg md:text-xl text-white">{member.name}</h3>
-          <p className="text-gray-400">{member.role}</p>
-        </motion.div>
-      ))}
-    </motion.div>
+        ))}
+      </motion.div>
+    </div>
+
+    {/* --- JUNIOR COMMITTEE --- */}
+    <div>
+      <motion.h2 className="text-4xl md:text-5xl font-bold text-white" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
+        Junior Committee
+      </motion.h2>
+      <motion.p className="text-lg text-gray-400 max-w-2xl mx-auto mt-4 mb-16" initial={{ opacity: 0 }} whileInView={{ opacity: 1, delay: 0.2 }} viewport={{ once: true }}>
+        The rising stars and dedicated members powering our community's core activities.
+      </motion.p>
+      
+      <div className="space-y-16">
+        <TeamSubgroup title="Technical Team" members={juniorTechnicalTeam} />
+        <TeamSubgroup title="Design Team" members={juniorDesignTeam} />
+        <TeamSubgroup title="Marketing Team" members={juniorMarketingTeam} />
+        <TeamSubgroup title="Event Coordinator Team" members={juniorEventCoordinatorTeam} />
+        <TeamSubgroup title="Secretary Team" members={juniorSecretaryTeam} />
+        <TeamSubgroup title="WIF Core Members" members={wifCoreTeam} />
+      </div>
+    </div>
 
   </div>
 </section>
@@ -558,8 +565,8 @@ We build open, inclusive technology together. Our community welcomes everyone, v
 </section>
 
  
-    {/* === UPCOMING EVENTS SECTION (IEEE Style) === */}
-<section id="events-section" className="py-24 bg-gray-900">
+    {/* === UPCOMING EVENTS SECTION === */}
+<section id="upcoming-events-section" className="py-24 bg-gray-900">
     <div className="container mx-auto px-6">
         <motion.h2 
             className="text-4xl font-bold text-center mb-16 text-white" 
@@ -690,17 +697,49 @@ We build open, inclusive technology together. Our community welcomes everyone, v
   </div>
 </section>
       
-      {/* 10. JOIN US CTA */}
-      <section id="join-us-section" className="relative py-24 bg-fixed bg-center bg-cover" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1471&q=80')" }}>
-        <div className="absolute inset-0 bg-black/70"></div>
-        <div className="relative container mx-auto px-6 text-center">
-          <motion.h2 className="text-3xl font-bold text-white mb-4" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>Ready to Join Our Community?</motion.h2>
-          <motion.p className="text-gray-300 max-w-2xl mx-auto mb-8" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>Become a member and unlock opportunities to grow, learn, and connect with professionals across all our specialized chapters.</motion.p>
-          <motion.div initial={{ scale: 0.9, opacity: 0 }} whileInView={{ scale: 1, opacity: 1 }} viewport={{ once: true }}>
-            <a href="https://forms.gle/your_google_form_link" target="_blank" rel="noopener noreferrer" className="bg-teal-500 text-white font-bold py-3 px-8 rounded-full text-lg hover:bg-teal-600 transition">Join Now - It's Free</a>
-          </motion.div>
-        </div>
-      </section>
+    {/* 10. JOIN US CTA */}
+<section
+  id="join-us-section"
+  className="relative py-24 bg-fixed bg-center bg-cover"
+  style={{
+    backgroundImage:
+      "url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1471&q=80')",
+  }}
+>
+  <div className="absolute inset-0 bg-black/70"></div>
+  <div className="relative container mx-auto px-6 text-center">
+    <motion.h2
+      className="text-3xl font-bold text-white mb-4"
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true }}
+    >
+      Ready to Join Our Community?
+    </motion.h2>
+    <motion.p
+      className="text-gray-300 max-w-2xl mx-auto mb-8"
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true }}
+    >
+      Become a member and unlock opportunities to grow, learn, and connect with professionals across all our specialized chapters.
+    </motion.p>
+    <motion.div
+      initial={{ scale: 0.9, opacity: 0 }}
+      whileInView={{ scale: 1, opacity: 1 }}
+      viewport={{ once: true }}
+    >
+      <a
+        href="https://forms.gle/your_google_form_link"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="bg-teal-500 text-white font-bold py-3 px-8 rounded-full text-lg hover:bg-teal-600 transition"
+      >
+        Join Now - It's Free
+      </a>
+    </motion.div>
+  </div>
+</section>
     </div>
   );
 };

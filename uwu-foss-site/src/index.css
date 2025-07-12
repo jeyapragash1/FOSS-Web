@@ -1,6 +1,7 @@
 @import "tailwindcss";
 /* src/index.css -- OPTION 1: Digital Energy Pulse */
 /* src/index.css -- OPTION 2: Neural Network / Circuit Board */
+/* src/index.css */
 
 @tailwind base;
 @tailwind components;
@@ -18,46 +19,19 @@
   100% { background-position: 0% 50%; }
 }
 
-/* NEW: Animated Circuit Board / Neural Network Background */
+/* NEW: Animated Digital Lines Background */
 .digital-lines-background {
-  background-color: #0a0a14; /* A deep, dark base */
-  position: relative;
-  overflow: hidden;
+  /* A dark blue-black base color */
+  background-color: #0d1117; 
+  /* The grid lines: a faint light blue */
+  background-image: 
+    linear-gradient(rgba(0, 190, 255, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 190, 255, 0.1) 1px, transparent 1px);
+  background-size: 3rem 3rem; /* Spacing of the grid lines */
+  animation: pan-lines 60s linear infinite;
 }
 
-.digital-lines-background::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 200%;
-  height: 200%;
-  
-  /* This is a complex SVG background that creates the circuit board effect */
-  background-image: url("data:image/svg+xml,%3Csvg width='200' height='200' viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%2308f' fill-opacity='0.1'%3E%3Cpath d='M100 50 L200 50 L200 0 L150 0 L150 50 L100 50 Z M0 150 L100 150 L100 100 L50 100 L50 50 L0 50 Z'/%3E%3Cpath d='M100 50 L100 100 L50 100 L50 150 L0 150 L0 200 L50 200 L50 150 L100 150 L100 200 L150 200 L150 150 L100 150 Z'/%3E%3C/g%3E%3C/svg%3E");
-
-  /* The animations */
-  animation: 
-    pan-circuit 90s linear infinite,
-    hue-shift 15s linear infinite;
-
-  will-change: transform, filter;
-}
-
-/* Animation for panning the circuit */
-@keyframes pan-circuit {
-  0% { transform: translate(0, 0); }
-  100% { transform: translate(-50%, -50%); }
-}
-
-/* Animation for the subtle color shift */
-@keyframes hue-shift {
-  0% { filter: hue-rotate(0deg); }
-  100% { filter: hue-rotate(360deg); }
-}
-/* src/index.css -- Add this new class */
-
-.premium-gradient-background {
-  /* An example using the "Deep Navy" palette */
-  background: radial-gradient(ellipse at bottom, #172554 0%, #020617 70%); /* from blue-900 to slate-950 */
+@keyframes pan-lines {
+  0% { background-position: 0 0; }
+  100% { background-position: 100rem 100rem; }
 }
