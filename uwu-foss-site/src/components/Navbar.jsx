@@ -6,7 +6,7 @@ import { motion } from 'framer-motion'; // Import motion for animations
 import { Menu, X } from "lucide-react";
 import { cn } from "../lib/utils";
 
-import fossLogo from '../assets/images/l2.jpg'; 
+import fossLogo from '../assets/images/Icon/l2.jpg'; 
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -50,7 +50,7 @@ export default function Navbar() {
               />
             </motion.div>
             <span className="ml-3 text-xl font-bold text-white hidden sm:block">
-              UWU FOSS
+               FOSS UWU
             </span>
           </Link>
           

@@ -8,21 +8,24 @@ import { ChevronLeft, ChevronRight, Quote, Calendar, Clock, MapPin } from 'lucid
 import { Code, Users, BookOpen, ShieldCheck, Sparkles, Key } from 'lucide-react';
 import TestimonialSlider from '../components/TestimonialSlider';
 
-import sachinduKavishka from '../assets/images/xcom/Sachindu Kavishka.jpg';
-import wasanaNilakshi from '../assets/images/xcom/Wasana Nilakshi.jpg';
-import rashmiRuwanthika from '../assets/images/xcom/Rashmi Ruwanthika Athukorala.jpg';
-import isuriManodya from '../assets/images/xcom/Hasini Sarathchandra.jpeg'; 
-import kasunJahith from '../assets/images/xcom/kasun bandara.jpeg'; 
-import kishoJeyapragash from '../assets/images/xcom/jp-tech-lead.PNG';
-import kavindaChamod from '../assets/images/xcom/Kavinda Chandrasiri.jpg';
-import bhagyaLakshan from '../assets/images/xcom/PANAMALDENIYE R.I.M..jpg'; 
-import thinujaHettiarachchi from '../assets/images/xcom/Thinuja hettiarachchi.jpeg';
-import misalRanasinghe from '../assets/images/xcom/Nisal Ranasinghe.jpeg';
-import raeesAhamed from '../assets/images/xcom/Raees Ahamed.jpg';
-import tharinduDevinda from '../assets/images/xcom/Tharindu devinda.jpg';
-import nilakshanRaveendran from '../assets/images/xcom/NILAKSHAN R..jpg';
+import sachinduKavishka from '../assets/images/xcom/Club le/Sachindu Kavishka.jpg';
+import wasanaNilakshi from '../assets/images/xcom/Sec/Wasana Nilakshi.jpg';
+import rashmiRuwanthika from '../assets/images/xcom/Sec/Rashmi Ruwanthika Athukorala.jpg';
+import Hasini from '../assets/images/xcom/Des-WIF/Hasini Sarathchandra.jpeg'; 
+import kasunJahith from '../assets/images/xcom/Ev-Co/kasun bandara.jpeg'; 
+import kishoJeyapragash from '../assets/images/xcom/Tech/jp-tech-lead.PNG';
+import Kavinda from '../assets/images/xcom/Mem-Rec/Kavinda Chandrasiri.jpg';
+import Chamodya from '../assets/images/xcom/Mem-Rec/Chamodya Perera.jpg';
+import hasini from '../assets/images/xcom/Des-WIF/Hasini Sarathchandra.jpeg';
+import isuriManodya from '../assets/images/xcom/P-R-L/PANAMALDENIYE R.I.M..jpg'; 
+import thinujaHettiarachchi from '../assets/images/xcom/Tech/Thinuja hettiarachchi.jpeg';
+import misalRanasinghe from '../assets/images/xcom/Des/Nisal Ranasinghe.jpeg';
+import raeesAhamed from '../assets/images/xcom/Tresu/Raees Ahamed.jpg';
+import tharinduDevinda from '../assets/images/xcom/Tresu/Tharindu devinda.jpg';
+import nilakshanRaveendran from '../assets/images/xcom/Des/NILAKSHAN R..jpg';
+import bhagyaLakshan from '../assets/images/xcom/Mar/MADHUSHANKA R.M.B.L..jpg';
 
-import heroVideo from '../assets/videos/video1.mp4';
+import heroVideo from '../assets/videos/v3.mp4';
 
 import {  Camera } from 'lucide-react';
 import { Target, Eye, Award } from 'lucide-react';
@@ -86,20 +89,27 @@ const events = [
 
 // --- REPLACE your old executiveCommittee data with this in HomePage.jsx ---
 
+// --- CORRECTED & RE-ORDERED EXECUTIVE COMMITTEE DATA ---
+
 const executiveCommittee = [
+  // Core Leadership
   { name: 'Sachindu Kavishka', role: 'Club Lead', img: sachinduKavishka },
   { name: 'Wasana Nilakshi', role: 'Secretary', img: wasanaNilakshi },
   { name: 'Rashmi Ruwanthika', role: 'Assistant Secretary', img: rashmiRuwanthika },
-  { name: 'Isuri Manodya', role: 'Public Relations Lead', img: isuriManodya },
-  { name: 'Kasun Jahith Bandara', role: 'Event Coordinator', img: kasunJahith },
-  { name: 'Kisho Jeyapragash', role: 'Technical Manager', img: kishoJeyapragash },
-  { name: 'Kavinda Chamod', role: 'Membership & Recruitment Lead', img: kavindaChamod },
-  { name: 'Bhagya Lakshan', role: 'Marketing and publicity Lead', img: bhagyaLakshan },
-  { name: 'Thinuja Hettiarachchi', role: 'Technical Manager', img: thinujaHettiarachchi },
-  { name: 'Misal Ranasinghe', role: 'Design Lead', img: misalRanasinghe },
   { name: 'Raees Ahamed', role: 'Treasurer', img: raeesAhamed },
   { name: 'Tharindu Devinda', role: 'Assistant Treasurer', img: tharinduDevinda },
+  
+  // Team Leads
+  { name: 'Bhagya Lakshan', role: 'Marketing & Publicity Lead', img: bhagyaLakshan },
+  { name: 'Isuri Manodya', role: 'Public Relations Lead', img: isuriManodya },
+  { name: 'Kasun Janith Bandara', role: 'Event Coordinator', img: kasunJahith },
+  { name: 'Kavinda Chamod', role: 'Membership & Recruit Lead', img: Kavinda },
+  { name: 'Chamodya Perera', role: 'Membership & Recruit Lead', img: Chamodya },
+  { name: 'Kisho Jeyapragash', role: 'Technical Manager', img: kishoJeyapragash },
+    { name: 'Thinuja Hettiarachchi', role: 'Technical Manager', img: thinujaHettiarachchi },
+  { name: 'Misal Ranasinghe', role: 'Design Lead', img: misalRanasinghe },
   { name: 'Nilakshan Raveendran', role: 'Design Lead', img: nilakshanRaveendran },
+  { name: 'Hasini Sarathchandra', role: 'Design Lead - WIF', img: hasini },
 ];
 
 const coordinatingTeam = [
@@ -124,18 +134,18 @@ const technicalTeam = [
     { name: 'Fathima Rushdha', role: 'Social Media Manager', img: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80' },
 
   ];
-const designTeam = [
-    { name: 'Imasha Vithanage', role: 'Lead UI/UX Designer', img: 'https://images.unsplash.com/photo-1554151228-14d9def656e4?auto=format&fit=crop&w=400&q=80' },
-    { name: 'Praveen Jayasuriya', role: 'Graphic Designer', img: 'https://images.unsplash.com/photo-1599566150163-29194dcaad36?auto=format&fit=crop&w=400&q=80' },
-    { name: 'Nethmi Silva', role: 'Event Coordinator', img: 'https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?auto=format&fit=crop&w=400&q=80' },
-    { name: 'Kavindu Perera', role: 'Partnerships Lead', img: 'https://images.unsplash.com/photo-1629425733761-caae3b5f2e50?auto=format&fit=crop&w=400&q=80' },
-    { name: 'Fathima Rushdha', role: 'Social Media Manager', img: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80' },
-    { name: 'Nethmi Silva', role: 'Event Coordinator', img: 'https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?auto=format&fit=crop&w=400&q=80' },
-    { name: 'Kavindu Perera', role: 'Partnerships Lead', img: 'https://images.unsplash.com/photo-1629425733761-caae3b5f2e50?auto=format&fit=crop&w=400&q=80' },
-    { name: 'Fathima Rushdha', role: 'Social Media Manager', img: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80' },
+// const designTeam = [
+//     { name: 'Imasha Vithanage', role: 'Lead UI/UX Designer', img: 'https://images.unsplash.com/photo-1554151228-14d9def656e4?auto=format&fit=crop&w=400&q=80' },
+//     { name: 'Praveen Jayasuriya', role: 'Graphic Designer', img: 'https://images.unsplash.com/photo-1599566150163-29194dcaad36?auto=format&fit=crop&w=400&q=80' },
+//     { name: 'Nethmi Silva', role: 'Event Coordinator', img: 'https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?auto=format&fit=crop&w=400&q=80' },
+//     { name: 'Kavindu Perera', role: 'Partnerships Lead', img: 'https://images.unsplash.com/photo-1629425733761-caae3b5f2e50?auto=format&fit=crop&w=400&q=80' },
+//     { name: 'Fathima Rushdha', role: 'Social Media Manager', img: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80' },
+//     { name: 'Nethmi Silva', role: 'Event Coordinator', img: 'https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?auto=format&fit=crop&w=400&q=80' },
+//     { name: 'Kavindu Perera', role: 'Partnerships Lead', img: 'https://images.unsplash.com/photo-1629425733761-caae3b5f2e50?auto=format&fit=crop&w=400&q=80' },
+//     { name: 'Fathima Rushdha', role: 'Social Media Manager', img: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80' },
 
 
-  ];
+//   ];
 
 // --- UPDATE THIS DATA ARRAY IN HomePage.jsx ---
 
@@ -336,8 +346,7 @@ const HomePage = () => {
         </div>
         <h3 className="text-2xl font-bold mb-3 text-white">Our Mission</h3>
         <p className="text-gray-400 leading-relaxed">
-            To foster technological innovation and professional growth by championing the core open-source principles of collaboration, transparency, and community-driven development.
-        </p>
+A Free and Open Source Software (FOSS) community's mission is to promote, develop, and diversify the use of FOSS.        </p>
       </motion.div>
 
       {/* Card 2: Our Vision (Highlighted) */}
@@ -356,8 +365,7 @@ const HomePage = () => {
             </div>
             <h3 className="text-2xl font-bold mb-3 text-white">Our Vision</h3>
             <p className="text-gray-400 leading-relaxed">
-                To be the leading student organization that bridges the gap between academic learning and real-world industry practice, preparing students for successful careers in technology.
-            </p>
+A Free and Open Source Software (FOSS) community's vision is typically centered around software freedom, innovation, and collaboration, while its mission focuses on promoting, educating, and enabling the use and development of FOSS.            </p>
         </div>
       </motion.div>
 
@@ -374,8 +382,7 @@ const HomePage = () => {
         </div>
         <h3 className="text-2xl font-bold mb-3 text-white">Our Values</h3>
         <p className="text-gray-400 leading-relaxed">
-            We believe in the power of community, the importance of transparency, and the freedom to innovate and share knowledge openly with everyone.
-        </p>
+We build open, inclusive technology together. Our community welcomes everyone, values teamwork, and encourages learning and growth.        </p>
       </motion.div>
     </motion.div>
   </div>
@@ -426,8 +433,9 @@ const HomePage = () => {
   </div>
 </section>
       
-{/* === MEET OUR TEAM SECTION (with Real Images) === */}
-<section id="about-section" className="py-24 bg-gray-900/90 backdrop-blur-sm">
+
+{/* === MEET OUR EXECUTIVE COMMITTEE & TEAM LEADS === */}
+<section id="about-section" className="py-24 bg-gray-900/95 backdrop-blur-sm">
   <div className="container mx-auto px-6 text-center">
     
     {/* Section Header */}
@@ -452,7 +460,7 @@ const HomePage = () => {
 
     {/* Team Grid */}
     <motion.div 
-      className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-8 gap-y-12"
+      className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-8 gap-y-12 justify-center"
       variants={containerVariant}
       initial="hidden"
       whileInView="visible"
@@ -488,7 +496,6 @@ const HomePage = () => {
 
   </div>
 </section>
-
 
 {/* 5. NEW TESTIMONIALS SLIDER SECTION */}
 <TestimonialSlider testimonials={testimonials} />
