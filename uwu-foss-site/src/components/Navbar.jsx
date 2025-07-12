@@ -1,13 +1,12 @@
 // src/components/Navbar.jsx
 
 import React, { useState, useEffect } from 'react';
-// CORRECTED IMPORT: We are using Link from 'react-scroll'
 import { Link } from 'react-scroll'; 
+import { motion } from 'framer-motion'; // Import motion for animations
 import { Menu, X } from "lucide-react";
 import { cn } from "../lib/utils";
 
-// NEW: Import your logo
-import fossLogo from '../assets/images/logo.jpg'; 
+import fossLogo from '../assets/images/l2.jpg'; 
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -35,12 +34,24 @@ export default function Navbar() {
   return (
     <nav className={cn("sticky top-0 z-50 transition-all duration-300", scrolled ? "bg-gray-800/80 backdrop-blur-md shadow-lg" : "bg-transparent")}>
       <div className="container mx-auto px-6">
-        <div className="relative flex h-16 items-center justify-between">
+        <div className="relative flex h-20 items-center justify-between"> {/* Increased navbar height to h-20 */}
           
-          {/* LOGO SECTION - UPDATED */}
-          <Link to="hero-section" spy={true} smooth={true} offset={-70} duration={500} className="flex items-center cursor-pointer">
-            <img className="h-10 w-auto rounded-full" src={fossLogo} alt="FOSS UWU Logo" />
-            <span className="ml-3 text-xl font-bold text-white hidden sm:block">UWU FOSS</span>
+          {/* LOGO SECTION - UPDATED with 3D animation */}
+          <Link to="hero-section" spy={true} smooth={true} offset={-70} duration={500} className="flex items-center cursor-pointer group">
+            <motion.div
+              whileHover={{ y: -5, scale: 1.1, rotateX: 10, rotateY: -5 }}
+              transition={{ type: "spring", stiffness: 300 }}
+              style={{ transformStyle: "preserve-3d" }}
+            >
+              <img 
+                className="h-12 w-12 rounded-full object-cover border-2 border-gray-600 group-hover:border-teal-400 transition-all duration-300 shadow-lg" 
+                src={fossLogo} 
+                alt="FOSS UWU Logo" 
+              />
+            </motion.div>
+            <span className="ml-3 text-xl font-bold text-white hidden sm:block">
+              UWU FOSS
+            </span>
           </Link>
           
           {/* Desktop Navigation */}

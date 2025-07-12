@@ -9,6 +9,8 @@ import { ChevronLeft, ChevronRight, Quote, Calendar, Clock, MapPin } from 'lucid
 import TestimonialSlider from '../components/TestimonialSlider';
 // Add this import at the top of your HomePage.jsx file
 import heroVideo from '../assets/videos/video1.mp4';
+// Add 'Camera' to your lucide-react import at the top of HomePage.jsx
+import {  Camera } from 'lucide-react';
 
 // filepath: g:\GitHub\FOSS-Web\uwu-foss-site\src\pages\HomePage.jsx
 import { Target, Eye, Award } from 'lucide-react';
@@ -147,14 +149,47 @@ const chapters = [
     { name: 'Systems & DevOps', icon: '🐧', desc: 'Working with Linux, shell scripting, containerization, and automation.' },
 ];
 
+// --- UPDATE THIS DATA ARRAY IN HomePage.jsx ---
+
 const blogPosts = [
-    { slug: 'mastering-git-and-github', title: 'Mastering Git & GitHub', img: 'https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?auto=format&fit=crop&w=800&q=60' },
-    { slug: 'why-you-should-learn-linux', title: 'Why You Should Learn Linux', img: 'https://images.unsplash.com/photo-1599658880436-c61792e70672?auto=format&fit=crop&w=800&q=60' },
-    { slug: 'intro-to-modern-web-dev', title: 'Intro to Modern Web Dev', img: 'https://images.unsplash.com/photo-1593720213428-28a5b9e94613?auto=format&fit=crop&w=800&q=60' },
+    { 
+        slug: 'mastering-git-and-github', 
+        title: 'Mastering Git & GitHub', 
+        img: 'https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?auto=format&fit=crop&w=800&q=60',
+        category: 'Tutorial',
+        excerpt: 'A beginner\'s guide to version control that every developer needs. Learn the fundamentals of Git and how to collaborate on GitHub.',
+        authorName: 'Asiri Weerasinghe',
+        authorImg: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=100&q=80'
+    },
+    { 
+        slug: 'why-you-should-learn-linux', 
+        title: 'Why You Should Learn Linux', 
+        img: 'https://images.unsplash.com/photo-1599658880436-c61792e70672?auto=format&fit=crop&w=800&q=60',
+        category: 'DevOps',
+        excerpt: 'Unlock the power of the command line and understand the backbone of the internet and cloud infrastructure.',
+        authorName: 'Chandima Jayawardana',
+        authorImg: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=100&q=80'
+    },
+    { 
+        slug: 'intro-to-modern-web-dev', 
+        title: 'Intro to Modern Web Dev', 
+        img: 'https://images.unsplash.com/photo-1593720213428-28a5b9e94613?auto=format&fit=crop&w=800&q=60',
+        category: 'Community',
+        excerpt: 'A look into the React ecosystem and a recap of our latest workshop on building modern web applications.',
+        authorName: 'Raees Ahamed',
+        authorImg: 'https://images.unsplash.com/photo-1624561172888-ac93c696e10c?auto=format&fit=crop&w=100&q=80'
+    },
 ];
 
-const galleryImages = ["https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=800&q=60", "https://images.unsplash.com/photo-1523580494863-6f3031224c94?auto=format&fit=crop&w=800&q=60", "https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=800&q=60", "https://images.unsplash.com/photo-1579567761406-4684ee0c75b6?auto=format&fit=crop&w=800&q=60"];
+// --- UPDATE THIS DATA ARRAY IN HomePage.jsx ---
 
+const galleryImages = [
+    { src: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=1200&q=80', alt: 'Speaker at a conference', event: 'FOSSYCon 2024', layout: 'col-span-2 row-span-2' },
+    { src: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=800&q=60', alt: 'Students in a workshop', event: 'React Workshop' },
+    { src: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=800&q=60', alt: 'Group discussion at an event', event: 'AI Summit' },
+    { src: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=800&q=60', alt: 'Team collaborating on laptops', event: 'Hackathon' },
+    { src: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=60', alt: 'Students networking', event: 'Community Meetup' },
+];
 
 const TeamGrid = ({ teamData }) => (
     <motion.div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-8 mt-12" variants={containerVariant} initial="hidden" whileInView="visible" viewport={{ once: true }}>
@@ -318,8 +353,45 @@ const HomePage = () => {
   </div>
 </section>
 
-  {/* === RECENT UPDATES SECTION (with Action Buttons) === */}
-<section className="py-24 bg-gray-900">
+   {/* 7. TECHNOLOGY CHAPTERS SECTION */}
+      <section id="chapters-section" className="py-24 bg-gray-900">
+        <div className="container mx-auto px-6 text-center">
+          <motion.h2 className="text-4xl font-bold mb-4 text-white" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>Our Technology Chapters</motion.h2>
+          <motion.p className="text-lg text-gray-400 max-w-3xl mx-auto mb-16" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>Explore our specialized chapters that focus on different areas of technology.</motion.p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            {chapters.map((chapter, i) => (<motion.div key={i} className="bg-gray-800 p-8 rounded-lg shadow-lg" initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}><div className="text-5xl mb-4">{chapter.icon}</div><h3 className="font-bold text-xl text-white mb-2">{chapter.name}</h3><p className="text-sm text-gray-400">{chapter.desc}</p></motion.div>))}
+          </div>
+        </div>
+      </section>
+      
+
+
+
+
+      {/* 6. NEW MEET OUR TEAMS SECTION */}
+      <section id ="about-section" className="py-24 bg-gray-800">
+        <div className="container mx-auto px-6 text-center">
+          <motion.h2 className="text-4xl font-bold mb-4 text-white" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>Meet Our Core Teams</motion.h2>
+          <motion.p className="text-lg text-gray-400 max-w-2xl mx-auto mb-12" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>The passionate individuals who drive our community forward with dedication and innovation.</motion.p>
+          <div className="flex justify-center space-x-2 md:space-x-4 mb-8">
+            <button onClick={() => setActiveTeamTab('Leadership')} className={`px-4 py-2 rounded-md font-semibold transition ${activeTeamTab === 'Leadership' ? 'bg-teal-500 text-white' : 'bg-gray-700 text-gray-300'}`}>Leadership</button>
+            <button onClick={() => setActiveTeamTab('Coordinating')} className={`px-4 py-2 rounded-md font-semibold transition ${activeTeamTab === 'Coordinating' ? 'bg-teal-500 text-white' : 'bg-gray-700 text-gray-300'}`}>Coordinating</button>
+            <button onClick={() => setActiveTeamTab('Technical')} className={`px-4 py-2 rounded-md font-semibold transition ${activeTeamTab === 'Technical' ? 'bg-teal-500 text-white' : 'bg-gray-700 text-gray-300'}`}>Technical</button>
+            <button onClick={() => setActiveTeamTab('Design')} className={`px-4 py-2 rounded-md font-semibold transition ${activeTeamTab === 'Design' ? 'bg-teal-500 text-white' : 'bg-gray-700 text-gray-300'}`}>Design</button>
+          </div>
+          <div>
+            {activeTeamTab === 'Leadership' && <TeamGrid teamData={leadershipTeam} />}
+            {activeTeamTab === 'Coordinating' && <TeamGrid teamData={coordinatingTeam} />}
+            {activeTeamTab === 'Technical' && <TeamGrid teamData={technicalTeam} />}
+            {activeTeamTab === 'Design' && <TeamGrid teamData={designTeam} />}
+          </div>
+        </div>
+      </section>
+
+{/* 5. NEW TESTIMONIALS SLIDER SECTION */}
+<TestimonialSlider testimonials={testimonials} />
+ {/* === RECENT UPDATES SECTION (with Action Buttons) === */}
+<section id='events-section' className="py-24 bg-gray-900">
   <div className="container mx-auto px-6">
     <motion.h2 
       className="text-4xl font-bold text-center mb-16 text-white" 
@@ -376,6 +448,7 @@ const HomePage = () => {
   </div>
 </section>
 
+ 
     {/* === UPCOMING EVENTS SECTION (IEEE Style) === */}
 <section id="events-section" className="py-24 bg-gray-900">
     <div className="container mx-auto px-6">
@@ -443,40 +516,9 @@ const HomePage = () => {
     </div>
 </section>
       
-{/* 5. NEW TESTIMONIALS SLIDER SECTION */}
-<TestimonialSlider testimonials={testimonials} />
 
-      {/* 6. NEW MEET OUR TEAMS SECTION */}
-      <section className="py-24 bg-gray-800">
-        <div className="container mx-auto px-6 text-center">
-          <motion.h2 className="text-4xl font-bold mb-4 text-white" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>Meet Our Core Teams</motion.h2>
-          <motion.p className="text-lg text-gray-400 max-w-2xl mx-auto mb-12" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>The passionate individuals who drive our community forward with dedication and innovation.</motion.p>
-          <div className="flex justify-center space-x-2 md:space-x-4 mb-8">
-            <button onClick={() => setActiveTeamTab('Leadership')} className={`px-4 py-2 rounded-md font-semibold transition ${activeTeamTab === 'Leadership' ? 'bg-teal-500 text-white' : 'bg-gray-700 text-gray-300'}`}>Leadership</button>
-            <button onClick={() => setActiveTeamTab('Coordinating')} className={`px-4 py-2 rounded-md font-semibold transition ${activeTeamTab === 'Coordinating' ? 'bg-teal-500 text-white' : 'bg-gray-700 text-gray-300'}`}>Coordinating</button>
-            <button onClick={() => setActiveTeamTab('Technical')} className={`px-4 py-2 rounded-md font-semibold transition ${activeTeamTab === 'Technical' ? 'bg-teal-500 text-white' : 'bg-gray-700 text-gray-300'}`}>Technical</button>
-            <button onClick={() => setActiveTeamTab('Design')} className={`px-4 py-2 rounded-md font-semibold transition ${activeTeamTab === 'Design' ? 'bg-teal-500 text-white' : 'bg-gray-700 text-gray-300'}`}>Design</button>
-          </div>
-          <div>
-            {activeTeamTab === 'Leadership' && <TeamGrid teamData={leadershipTeam} />}
-            {activeTeamTab === 'Coordinating' && <TeamGrid teamData={coordinatingTeam} />}
-            {activeTeamTab === 'Technical' && <TeamGrid teamData={technicalTeam} />}
-            {activeTeamTab === 'Design' && <TeamGrid teamData={designTeam} />}
-          </div>
-        </div>
-      </section>
 
-      {/* 7. TECHNOLOGY CHAPTERS SECTION */}
-      <section id="chapters-section" className="py-24 bg-gray-900">
-        <div className="container mx-auto px-6 text-center">
-          <motion.h2 className="text-4xl font-bold mb-4 text-white" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>Our Technology Chapters</motion.h2>
-          <motion.p className="text-lg text-gray-400 max-w-3xl mx-auto mb-16" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>Explore our specialized chapters that focus on different areas of technology.</motion.p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {chapters.map((chapter, i) => (<motion.div key={i} className="bg-gray-800 p-8 rounded-lg shadow-lg" initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}><div className="text-5xl mb-4">{chapter.icon}</div><h3 className="font-bold text-xl text-white mb-2">{chapter.name}</h3><p className="text-sm text-gray-400">{chapter.desc}</p></motion.div>))}
-          </div>
-        </div>
-      </section>
-      
+   
       {/* 8. BLOG SECTION */}
       <section id="blog-section" className="py-24 bg-gray-800">
         <div className="container mx-auto px-6">
@@ -487,15 +529,57 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* 9. GALLERY SECTION */}
-      <section id="gallery-section" className="py-24 bg-gray-900">
-        <div className="container mx-auto px-6 text-center">
-            <motion.h2 className="text-4xl font-bold mb-16 text-white" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>Community in Action</motion.h2>
-            <motion.div className="grid grid-cols-2 md:grid-cols-4 gap-4" variants={containerVariant} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-                {galleryImages.map((src, i) => (<motion.div key={i} variants={itemVariant} className="overflow-hidden rounded-lg"><img src={src} alt="" className="w-full h-full object-cover transform hover:scale-110 transition-transform" /></motion.div>))}
-            </motion.div>
-        </div>
-      </section>
+  {/* === GALLERY SECTION (New FOSS Style) === */}
+<section id="gallery-section" className="py-24 bg-gray-900">
+  <div className="container mx-auto px-6 text-center">
+    <motion.h2 
+      className="text-4xl font-bold mb-16 text-white" 
+      initial={{ opacity: 0 }} 
+      whileInView={{ opacity: 1 }} 
+      viewport={{ once: true }}
+    >
+      Community in Action
+    </motion.h2>
+
+    <motion.div 
+      className="grid grid-cols-2 md:grid-cols-4 gap-4 h-auto md:h-[600px] md:grid-rows-2"
+      variants={containerVariant}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true }}
+    >
+      {galleryImages.map((image, i) => (
+        <motion.div 
+          key={i} 
+          variants={itemVariant} 
+          className={`relative rounded-xl overflow-hidden shadow-lg group ${image.layout || ''}`}
+        >
+          <img 
+            src={image.src} 
+            alt={image.alt} 
+            className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500 ease-in-out" 
+          />
+          {/* Hover Overlay */}
+          <div className="absolute inset-0 bg-black/70 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <Camera className="w-8 h-8 text-white mb-2" />
+            <p className="text-white font-bold text-lg">{image.event}</p>
+          </div>
+        </motion.div>
+      ))}
+    </motion.div>
+
+    <motion.div 
+        className="text-center mt-16" 
+        initial={{ opacity: 0 }} 
+        whileInView={{ opacity: 1 }} 
+        viewport={{ once: true }}
+    >
+        <a href="#" className="text-teal-400 font-semibold text-lg hover:text-white transition">
+            Explore the Full Gallery →
+        </a>
+    </motion.div>
+  </div>
+</section>
       
       {/* 10. JOIN US CTA */}
       <section id="join-us-section" className="relative py-24 bg-fixed bg-center bg-cover" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1471&q=80')" }}>
