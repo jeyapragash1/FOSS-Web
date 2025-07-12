@@ -280,16 +280,26 @@ const galleryImages = [
     { src: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=60', alt: 'Students networking', event: 'Community Meetup' },
 ];
 
+// Helper component to display a grid of team members
 const TeamGrid = ({ teamData }) => (
-    <motion.div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-8 mt-12" variants={containerVariant} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-        {teamData.map((member, i) => (
-            <motion.div key={i} variants={itemVariant} className="text-center">
-                <img src={member.img} alt={member.name} className="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-gray-700 object-cover" />
-                <h3 className="font-bold text-xl text-white">{member.name}</h3>
-                <p className="text-teal-400">{member.role}</p>
-            </motion.div>
-        ))}
-    </motion.div>
+  <motion.div
+    key={JSON.stringify(teamData)} // Use a unique key for AnimatePresence to work
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    exit={{ opacity: 0, y: -20 }}
+    transition={{ duration: 0.4 }}
+    className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-7 gap-x-8 gap-y-12"
+  >
+    {teamData.map((member, i) => (
+      <div key={i} className="text-center flex flex-col items-center group">
+        <motion.div whileHover={{ scale: 1.1, y: -10 }} transition={{ type: 'spring', stiffness: 300 }} className="relative w-28 h-28 md:w-32 md:h-32 mb-4">
+          <div className="absolute inset-0 bg-teal-500 rounded-full blur-md opacity-0 group-hover:opacity-40 transition-opacity duration-300"></div>
+          <img src={member.img} alt={member.name} className="relative w-full h-full rounded-full object-cover border-4 border-gray-700 group-hover:border-teal-400 transition-colors duration-300" />
+        </motion.div>
+        <h4 className="font-semibold text-white">{member.name}</h4>
+      </div>
+    ))}
+  </motion.div>
 );
 
 // Helper component for Junior Committee subgroups
@@ -314,6 +324,7 @@ const TeamSubgroup = ({ title, members }) => (
 );
 
 const HomePage = () => {
+  const [activeJuniorTab, setActiveJuniorTab] = useState('Technical'); 
   return (
     <div className="digital-lines-background text-white">
       {/* 1. HERO SECTION */}
@@ -455,8 +466,8 @@ We build open, inclusive technology together. Our community welcomes everyone, v
     </motion.div>
   </div>
 </section>
-      
- {/* === MEET OUR TEAM (Executive & Junior Committees) === */}
+
+{/* === MEET OUR TEAM (with Tabbed Junior Committee) === */}
 <section id="team-section" className="py-24 bg-gray-900/95 backdrop-blur-sm">
   <div className="container mx-auto px-6 text-center">
     
@@ -487,22 +498,34 @@ We build open, inclusive technology together. Our community welcomes everyone, v
       <motion.h2 className="text-4xl md:text-5xl font-bold text-white" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
         Junior Committee
       </motion.h2>
-      <motion.p className="text-lg text-gray-400 max-w-2xl mx-auto mt-4 mb-16" initial={{ opacity: 0 }} whileInView={{ opacity: 1, delay: 0.2 }} viewport={{ once: true }}>
+      <motion.p className="text-lg text-gray-400 max-w-2xl mx-auto mt-4 mb-12" initial={{ opacity: 0 }} whileInView={{ opacity: 1, delay: 0.2 }} viewport={{ once: true }}>
         The rising stars and dedicated members powering our community's core activities.
       </motion.p>
       
-      <div className="space-y-16">
-        <TeamSubgroup title="Technical Team" members={juniorTechnicalTeam} />
-        <TeamSubgroup title="Design Team" members={juniorDesignTeam} />
-        <TeamSubgroup title="Marketing Team" members={juniorMarketingTeam} />
-        <TeamSubgroup title="Event Coordinator Team" members={juniorEventCoordinatorTeam} />
-        <TeamSubgroup title="Secretary Team" members={juniorSecretaryTeam} />
-        <TeamSubgroup title="WIF Core Members" members={wifCoreTeam} />
+      {/* Tab Buttons */}
+      <div className="flex flex-wrap justify-center gap-2 md:gap-4 mb-12">
+        <button onClick={() => setActiveJuniorTab('Technical')} className={`px-4 py-2 rounded-md font-semibold transition ${activeJuniorTab === 'Technical' ? 'bg-teal-500 text-white' : 'bg-gray-700 text-gray-300 hover:bg-gray-600'}`}>Technical</button>
+        <button onClick={() => setActiveJuniorTab('Design')} className={`px-4 py-2 rounded-md font-semibold transition ${activeJuniorTab === 'Design' ? 'bg-teal-500 text-white' : 'bg-gray-700 text-gray-300 hover:bg-gray-600'}`}>Design</button>
+        <button onClick={() => setActiveJuniorTab('Marketing')} className={`px-4 py-2 rounded-md font-semibold transition ${activeJuniorTab === 'Marketing' ? 'bg-teal-500 text-white' : 'bg-gray-700 text-gray-300 hover:bg-gray-600'}`}>Marketing</button>
+        <button onClick={() => setActiveJuniorTab('Events')} className={`px-4 py-2 rounded-md font-semibold transition ${activeJuniorTab === 'Events' ? 'bg-teal-500 text-white' : 'bg-gray-700 text-gray-300 hover:bg-gray-600'}`}>Event Coordinator</button>
+        <button onClick={() => setActiveJuniorTab('Secretary')} className={`px-4 py-2 rounded-md font-semibold transition ${activeJuniorTab === 'Secretary' ? 'bg-teal-500 text-white' : 'bg-gray-700 text-gray-300 hover:bg-gray-600'}`}>Secretary</button>
+        <button onClick={() => setActiveJuniorTab('WIF')} className={`px-4 py-2 rounded-md font-semibold transition ${activeJuniorTab === 'WIF' ? 'bg-teal-500 text-white' : 'bg-gray-700 text-gray-300 hover:bg-gray-600'}`}>WIF</button>
+      </div>
+
+      {/* Team Display Area */}
+      <div className="min-h-[300px]"> {/* Set a minimum height to prevent layout jumps */}
+        <AnimatePresence mode="wait">
+          {activeJuniorTab === 'Technical' && <TeamGrid key="technical" teamData={juniorTechnicalTeam} />}
+          {activeJuniorTab === 'Design' && <TeamGrid key="design" teamData={juniorDesignTeam} />}
+          {activeJuniorTab === 'Marketing' && <TeamGrid key="marketing" teamData={juniorMarketingTeam} />}
+          {activeJuniorTab === 'Events' && <TeamGrid key="events" teamData={juniorEventCoordinatorTeam} />}
+          {activeJuniorTab === 'Secretary' && <TeamGrid key="secretary" teamData={juniorSecretaryTeam} />}
+          {activeJuniorTab === 'WIF' && <TeamGrid key="wif" teamData={wifCoreTeam} />}
+        </AnimatePresence>
       </div>
     </div>
-
   </div>
-</section>
+</section> 
 
 {/* 5. NEW TESTIMONIALS SLIDER SECTION */}
 <TestimonialSlider testimonials={testimonials} />
