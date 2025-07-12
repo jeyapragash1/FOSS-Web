@@ -5,14 +5,36 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { TypeAnimation } from 'react-type-animation';
 import { Link } from 'react-scroll';
 import { ChevronLeft, ChevronRight, Quote, Calendar, Clock, MapPin } from 'lucide-react';
-// import { ChevronLeft, ChevronRight, Quote } from 'lucide-react';
+
 import TestimonialSlider from '../components/TestimonialSlider';
-// Add this import at the top of your HomePage.jsx file
+
+// Add these imports near the top of HomePage.jsx
+
+import sachinduKavishka from '../assets/images/xcom/Sachindu Kavishka.jpg';
+import wasanaNilakshi from '../assets/images/xcom/Wasana Nilakshi.jpg';
+import rashmiRuwanthika from '../assets/images/xcom/Rashmi Ruwanthika Athukorala.jpg';
+import isuriManodya from '../assets/images/xcom/Hasini Sarathchandra.jpeg'; 
+import kasunJahith from '../assets/images/xcom/kasun bandara.jpeg'; 
+import kishoJeyapragash from '../assets/images/xcom/jp-tech-lead.PNG';
+import kavindaChamod from '../assets/images/xcom/Kavinda Chandrasiri.jpg';
+import bhagyaLakshan from '../assets/images/xcom/PANAMALDENIYE R.I.M..jpg'; 
+import thinujaHettiarachchi from '../assets/images/xcom/Thinuja hettiarachchi.jpeg';
+import misalRanasinghe from '../assets/images/xcom/Nisal Ranasinghe.jpeg';
+import raeesAhamed from '../assets/images/xcom/Raees Ahamed.jpg';
+import tharinduDevinda from '../assets/images/xcom/Tharindu devinda.jpg';
+import nilakshanRaveendran from '../assets/images/xcom/NILAKSHAN R..jpg';
+
+
+
+
+
+
+
 import heroVideo from '../assets/videos/video1.mp4';
-// Add 'Camera' to your lucide-react import at the top of HomePage.jsx
+
 import {  Camera } from 'lucide-react';
 
-// filepath: g:\GitHub\FOSS-Web\uwu-foss-site\src\pages\HomePage.jsx
+
 import { Target, Eye, Award } from 'lucide-react';
 // --- Animation Variants ---
 const containerVariant = { hidden: { opacity: 0 }, visible: { opacity: 1, transition: { staggerChildren: 0.15 } } };
@@ -73,17 +95,26 @@ const events = [
     },
 ];
 
-const leadershipTeam = [
-     { name: 'Imasha Vithanage', role: 'Lead UI/UX Designer', img: 'https://images.unsplash.com/photo-1554151228-14d9def656e4?auto=format&fit=crop&w=400&q=80' },
-    { name: 'Praveen Jayasuriya', role: 'Graphic Designer', img: 'https://images.unsplash.com/photo-1599566150163-29194dcaad36?auto=format&fit=crop&w=400&q=80' },
-    { name: 'Nethmi Silva', role: 'Event Coordinator', img: 'https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?auto=format&fit=crop&w=400&q=80' },
-    { name: 'Kavindu Perera', role: 'Partnerships Lead', img: 'https://images.unsplash.com/photo-1629425733761-caae3b5f2e50?auto=format&fit=crop&w=400&q=80' },
-    { name: 'Fathima Rushdha', role: 'Social Media Manager', img: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80' },
-    { name: 'Nethmi Silva', role: 'Event Coordinator', img: 'https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?auto=format&fit=crop&w=400&q=80' },
-    { name: 'Kavindu Perera', role: 'Partnerships Lead', img: 'https://images.unsplash.com/photo-1629425733761-caae3b5f2e50?auto=format&fit=crop&w=400&q=80' },
-    { name: 'Fathima Rushdha', role: 'Social Media Manager', img: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80' },
+// --- REPLACE your old team data with this in HomePage.jsx ---
 
-  ];
+// --- REPLACE your old executiveCommittee data with this in HomePage.jsx ---
+
+const executiveCommittee = [
+  { name: 'Sachindu Kavishka', role: 'Club Lead', img: sachinduKavishka },
+  { name: 'Wasana Nilakshi', role: 'Secretary', img: wasanaNilakshi },
+  { name: 'Rashmi Ruwanthika', role: 'Assistant Secretary', img: rashmiRuwanthika },
+  { name: 'Isuri Manodya', role: 'Public Relations Lead', img: isuriManodya },
+  { name: 'Kasun Jahith Bandara', role: 'Event Coordinator', img: kasunJahith },
+  { name: 'Kisho Jeyapragash', role: 'Technical Manager', img: kishoJeyapragash },
+  { name: 'Kavinda Chamod', role: 'Membership & Recruitment Lead', img: kavindaChamod },
+  { name: 'Bhagya Lakshan', role: 'Marketing and publicity Lead', img: bhagyaLakshan },
+  { name: 'Thinuja Hettiarachchi', role: 'Technical Manager', img: thinujaHettiarachchi },
+  { name: 'Misal Ranasinghe', role: 'Design Lead', img: misalRanasinghe },
+  { name: 'Raees Ahamed', role: 'Treasurer', img: raeesAhamed },
+  { name: 'Tharindu Devinda', role: 'Assistant Treasurer', img: tharinduDevinda },
+  { name: 'Nilakshan Raveendran', role: 'Design Lead', img: nilakshanRaveendran },
+];
+
 const coordinatingTeam = [
     { name: 'Imasha Vithanage', role: 'Lead UI/UX Designer', img: 'https://images.unsplash.com/photo-1554151228-14d9def656e4?auto=format&fit=crop&w=400&q=80' },
     { name: 'Praveen Jayasuriya', role: 'Graphic Designer', img: 'https://images.unsplash.com/photo-1599566150163-29194dcaad36?auto=format&fit=crop&w=400&q=80' },
@@ -364,29 +395,69 @@ const HomePage = () => {
         </div>
       </section>
       
+{/* === MEET OUR TEAM SECTION (with Real Images) === */}
+<section id="about-section" className="py-24 bg-gray-900/90 backdrop-blur-sm">
+  <div className="container mx-auto px-6 text-center">
+    
+    {/* Section Header */}
+    <motion.h2 
+      className="text-4xl md:text-5xl font-bold text-white" 
+      initial={{ opacity: 0 }} 
+      whileInView={{ opacity: 1 }} 
+      viewport={{ once: true }}
+    >
+      Executive Committee & Team Leads
+    </motion.h2>
+    
+    <motion.p 
+      className="text-lg text-gray-400 max-w-2xl mx-auto mt-4 mb-16" 
+      initial={{ opacity: 0 }} 
+      whileInView={{ opacity: 1 }} 
+      viewport={{ once: true }}
+      transition={{ delay: 0.2 }}
+    >
+      The passionate individuals who drive our community forward with dedication and innovation.
+    </motion.p>
 
+    {/* Team Grid */}
+    <motion.div 
+      className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-8 gap-y-12"
+      variants={containerVariant}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true }}
+    >
+      {executiveCommittee.map((member, i) => (
+        <motion.div 
+          key={i} 
+          variants={itemVariant}
+          className="text-center flex flex-col items-center group"
+        >
+          {/* The image with glowing border effect */}
+          <motion.div 
+            whileHover={{ scale: 1.1, y: -10 }}
+            transition={{ type: 'spring', stiffness: 300 }}
+            className="relative w-32 h-32 md:w-36 md:h-36 mb-4"
+          >
+            {/* The subtle background glow */}
+            <div className="absolute inset-0 bg-teal-500 rounded-full blur-lg opacity-0 group-hover:opacity-50 transition-opacity duration-300"></div>
+            
+            <img 
+              src={member.img} 
+              alt={member.name} 
+              className="relative w-full h-full rounded-full object-cover border-4 border-gray-700 group-hover:border-teal-400 transition-colors duration-300" 
+            />
+          </motion.div>
+          
+          <h3 className="font-bold text-lg md:text-xl text-white">{member.name}</h3>
+          <p className="text-gray-400">{member.role}</p>
+        </motion.div>
+      ))}
+    </motion.div>
 
+  </div>
+</section>
 
-
-      {/* 6. NEW MEET OUR TEAMS SECTION */}
-      <section id ="about-section" className="py-24 bg-gray-800">
-        <div className="container mx-auto px-6 text-center">
-          <motion.h2 className="text-4xl font-bold mb-4 text-white" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>Meet Our Core Teams</motion.h2>
-          <motion.p className="text-lg text-gray-400 max-w-2xl mx-auto mb-12" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>The passionate individuals who drive our community forward with dedication and innovation.</motion.p>
-          <div className="flex justify-center space-x-2 md:space-x-4 mb-8">
-            <button onClick={() => setActiveTeamTab('Leadership')} className={`px-4 py-2 rounded-md font-semibold transition ${activeTeamTab === 'Leadership' ? 'bg-teal-500 text-white' : 'bg-gray-700 text-gray-300'}`}>Leadership</button>
-            <button onClick={() => setActiveTeamTab('Coordinating')} className={`px-4 py-2 rounded-md font-semibold transition ${activeTeamTab === 'Coordinating' ? 'bg-teal-500 text-white' : 'bg-gray-700 text-gray-300'}`}>Coordinating</button>
-            <button onClick={() => setActiveTeamTab('Technical')} className={`px-4 py-2 rounded-md font-semibold transition ${activeTeamTab === 'Technical' ? 'bg-teal-500 text-white' : 'bg-gray-700 text-gray-300'}`}>Technical</button>
-            <button onClick={() => setActiveTeamTab('Design')} className={`px-4 py-2 rounded-md font-semibold transition ${activeTeamTab === 'Design' ? 'bg-teal-500 text-white' : 'bg-gray-700 text-gray-300'}`}>Design</button>
-          </div>
-          <div>
-            {activeTeamTab === 'Leadership' && <TeamGrid teamData={leadershipTeam} />}
-            {activeTeamTab === 'Coordinating' && <TeamGrid teamData={coordinatingTeam} />}
-            {activeTeamTab === 'Technical' && <TeamGrid teamData={technicalTeam} />}
-            {activeTeamTab === 'Design' && <TeamGrid teamData={designTeam} />}
-          </div>
-        </div>
-      </section>
 
 {/* 5. NEW TESTIMONIALS SLIDER SECTION */}
 <TestimonialSlider testimonials={testimonials} />
