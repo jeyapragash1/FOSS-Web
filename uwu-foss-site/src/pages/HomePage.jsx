@@ -1,14 +1,12 @@
-// src/pages/HomePage.jsx
-
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { TypeAnimation } from 'react-type-animation';
 import { Link } from 'react-scroll';
 import { ChevronLeft, ChevronRight, Quote, Calendar, Clock, MapPin } from 'lucide-react';
-
+// import { Code, Users, BookOpen, ShieldCheck, Sparkles, Freedom } from 'lucide-react';
+// CORRECTED IMPORT
+import { Code, Users, BookOpen, ShieldCheck, Sparkles, Key } from 'lucide-react';
 import TestimonialSlider from '../components/TestimonialSlider';
-
-// Add these imports near the top of HomePage.jsx
 
 import sachinduKavishka from '../assets/images/xcom/Sachindu Kavishka.jpg';
 import wasanaNilakshi from '../assets/images/xcom/Wasana Nilakshi.jpg';
@@ -23,6 +21,7 @@ import misalRanasinghe from '../assets/images/xcom/Nisal Ranasinghe.jpeg';
 import raeesAhamed from '../assets/images/xcom/Raees Ahamed.jpg';
 import tharinduDevinda from '../assets/images/xcom/Tharindu devinda.jpg';
 import nilakshanRaveendran from '../assets/images/xcom/NILAKSHAN R..jpg';
+
 import heroVideo from '../assets/videos/video1.mp4';
 
 import {  Camera } from 'lucide-react';
@@ -199,6 +198,16 @@ const blogPosts = [
         authorImg: 'https://images.unsplash.com/photo-1624561172888-ac93c696e10c?auto=format&fit=crop&w=100&q=80'
     },
 ];
+// --- ADD THIS NEW DATA ARRAY IN HomePage.jsx ---
+
+const focusAreas = [
+    { name: 'Software Freedom', icon: <Key size={32} />, desc: 'Promoting the use and development of software that respects user freedom.' },
+    { name: 'Community Collaboration', icon: <Users size={32} />, desc: 'Building a strong, inclusive community where members can collaborate and grow together.' },
+    { name: 'Open Source Development', icon: <Code size={32} />, desc: 'Actively contributing to and maintaining impactful open source projects.' },
+    { name: 'Knowledge Sharing', icon: <BookOpen size={32} />, desc: 'Organizing workshops, talks, and mentorship to share expertise and skills.' },
+    { name: 'Security & Privacy', icon: <ShieldCheck size={32} />, desc: 'Advocating for secure coding practices and the use of privacy-respecting software.' },
+    { name: 'Innovation & Experimentation', icon: <Sparkles size={32} />, desc: 'Providing a playground for members to experiment with new ideas and cutting-edge technologies.' },
+];
 
 // --- UPDATE THIS DATA ARRAY IN HomePage.jsx ---
 
@@ -372,16 +381,50 @@ const HomePage = () => {
   </div>
 </section>
 
-   {/* 7. TECHNOLOGY CHAPTERS SECTION */}
-      <section id="chapters-section" className="py-24 bg-gray-900">
-        <div className="container mx-auto px-6 text-center">
-          <motion.h2 className="text-4xl font-bold mb-4 text-white" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>Our Technology Chapters</motion.h2>
-          <motion.p className="text-lg text-gray-400 max-w-3xl mx-auto mb-16" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>Explore our specialized chapters that focus on different areas of technology.</motion.p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {chapters.map((chapter, i) => (<motion.div key={i} className="bg-gray-800 p-8 rounded-lg shadow-lg" initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}><div className="text-5xl mb-4">{chapter.icon}</div><h3 className="font-bold text-xl text-white mb-2">{chapter.name}</h3><p className="text-sm text-gray-400">{chapter.desc}</p></motion.div>))}
+{/* === OUR FOCUS AREAS SECTION === */}
+<section id="focus-areas-section" className="py-24 bg-gray-800">
+  <div className="container mx-auto px-6 text-center">
+    <motion.h2 
+      className="text-4xl font-bold mb-4 text-white" 
+      initial={{ opacity: 0 }} 
+      whileInView={{ opacity: 1 }} 
+      viewport={{ once: true }}
+    >
+      Our Focus Areas
+    </motion.h2>
+    <motion.p 
+      className="text-lg text-gray-400 max-w-3xl mx-auto mb-16" 
+      initial={{ opacity: 0 }} 
+      whileInView={{ opacity: 1 }} 
+      viewport={{ once: true }}
+    >
+      We are dedicated to several core principles that guide our activities and contributions to the open-source world.
+    </motion.p>
+    
+    <motion.div 
+      className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
+      variants={containerVariant}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true }}
+    >
+      {focusAreas.map((area, i) => (
+        <motion.div 
+          key={i} 
+          variants={itemVariant}
+          whileHover={{ y: -10, scale: 1.03 }}
+          className="bg-gray-900 p-8 rounded-xl shadow-lg text-left border border-gray-700/50"
+        >
+          <div className="text-teal-400 mb-4">
+            {area.icon}
           </div>
-        </div>
-      </section>
+          <h3 className="font-bold text-xl text-white mb-2">{area.name}</h3>
+          <p className="text-gray-400">{area.desc}</p>
+        </motion.div>
+      ))}
+    </motion.div>
+  </div>
+</section>
       
 {/* === MEET OUR TEAM SECTION (with Real Images) === */}
 <section id="about-section" className="py-24 bg-gray-900/90 backdrop-blur-sm">
