@@ -1,13 +1,13 @@
 @import "tailwindcss";
-/* src/index.css -- OPTION 1: Digital Energy Pulse */
-/* src/index.css -- OPTION 2: Neural Network / Circuit Board */
-/* src/index.css */
+
+
+/* src/index.css -- OPTION 2: Digital Circuit Pulse */
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Gradient for the Hero Section */
+/* Gradient for the Hero Section (remains the same) */
 .animated-gradient {
   background-size: 400% 400%;
   animation: gradient-pan 15s ease infinite;
@@ -19,19 +19,36 @@
   100% { background-position: 0% 50%; }
 }
 
-/* NEW: Animated Digital Lines Background */
+/* NEW: Animated "Digital Circuit Pulse" Background */
 .digital-lines-background {
-  /* A dark blue-black base color */
-  background-color: #0d1117; 
-  /* The grid lines: a faint light blue */
-  background-image: 
-    linear-gradient(rgba(0, 190, 255, 0.1) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 190, 255, 0.1) 1px, transparent 1px);
-  background-size: 3rem 3rem; /* Spacing of the grid lines */
-  animation: pan-lines 60s linear infinite;
+  /* A very dark base color */
+  background-color: #0d1117;
+  
+  /* Multiple background layers for the effect */
+  background-image:
+    /* Layer 3: The grid on top */
+    linear-gradient(rgba(0, 225, 255, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 225, 255, 0.1) 1px, transparent 1px),
+    
+    /* Layer 2: The animated light blue energy pulse */
+    radial-gradient(circle at 25% 25%, rgba(0, 150, 255, 0.4), rgba(0, 150, 255, 0) 50%),
+    radial-gradient(circle at 75% 75%, rgba(0, 255, 200, 0.3), rgba(0, 255, 200, 0) 50%);
+
+  /* Define the size for each layer */
+  background-size: 
+    3rem 3rem, /* Grid size */
+    3rem 3rem, /* Grid size */
+    200% 200%, /* Pulse size */
+    200% 200%; /* Pulse size */
+  
+  animation: pan-grid-and-pulse 40s linear infinite;
 }
 
-@keyframes pan-lines {
-  0% { background-position: 0 0; }
-  100% { background-position: 100rem 100rem; }
+@keyframes pan-grid-and-pulse {
+  from {
+    background-position: 0 0, 0 0, 0% 0%, 100% 100%;
+  }
+  to {
+    background-position: 100rem 100rem, 100rem 100rem, 100% 100%, 0% 0%;
+  }
 }

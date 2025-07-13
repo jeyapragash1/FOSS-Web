@@ -1,11 +1,19 @@
+
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { TypeAnimation } from 'react-type-animation';
 import { Link } from 'react-scroll';
-import { ChevronLeft, ChevronRight, Quote, Calendar, Clock, MapPin } from 'lucide-react';
-
-import { Code, Users, BookOpen, ShieldCheck, Sparkles, Key } from 'lucide-react';
 import TestimonialSlider from '../components/TestimonialSlider';
+
+// The single, clean import line for all icons
+import { 
+  ChevronLeft, ChevronRight, Quote, Calendar, Clock, MapPin, 
+  Target, Eye, Award, Code, Users, BookOpen, ShieldCheck, 
+  Sparkles, Key, Camera 
+} from 'lucide-react';
+
+
+
 
 import sachinduKavishka from '../assets/images/xcom/Club le/Sachindu Kavishka.jpg';
 import wasanaNilakshi from '../assets/images/xcom/Sec/Wasana Nilakshi.jpg';
@@ -69,8 +77,6 @@ import himaliThennakoon from '../assets/images/jxcom/WIF/THENNAKOON T.M.T.G.H.M.
 
 import heroVideo from '../assets/videos/v3.mp4';
 
-import {  Camera } from 'lucide-react';
-import { Target, Eye, Award } from 'lucide-react';
 
 const containerVariant = { hidden: { opacity: 0 }, visible: { opacity: 1, transition: { staggerChildren: 0.15 } } };
 const itemVariant = { hidden: { y: 20, opacity: 0 }, visible: { y: 0, opacity: 1, transition: { type: 'spring', stiffness: 100 } } };
@@ -156,46 +162,46 @@ const juniorTechnicalTeam = [
     { name: 'Makilini Thelvarasa', img: makiliniThelvarasa },
     { name: 'Sayuru Malshan', img: sayuruMalshan },
     { name: 'J.A.D.T.D.W Jayasundara', img: jayasundara },
-    { name: 'Seelagama Nilesh Theekshana Peiris', img: theekshanaPeiris },
+    { name: 'Nilesh Theekshana Peiris', img: theekshanaPeiris },
     { name: 'Probath Sanjeewa Liyanage', img: probathSanjeewa },
-    { name: 'Nayana Neranjana Jayawickrama', img: nayanaNeranjana },
+    { name: 'Neranjana Jayawickrama', img: nayanaNeranjana },
     { name: 'Chirath Chalana Piyumika', img: chirathChalana },
 ];
 
 const juniorMarketingTeam = [
     { name: 'Kirushika Thavanesan', img: kirushikaThavanesan },
-    { name: 'Madurapperumage Binushi Nayanathara', img: binushiNayanathara },
+    { name: 'Binushi Nayanathara', img: binushiNayanathara },
 ];
 
 const juniorEventCoordinatorTeam = [
     { name: 'Inuka Kavinda', img: inukaKavinda },
-    { name: 'Sanduni Ayeshika Jayawardhana', img: sanduniAyeshika },
+    { name: 'Ayeshika Jayawardhana', img: sanduniAyeshika },
     { name: 'Ramesha Deshan', img: rameshaDeshan },
-    { name: 'Paththamperuma Arachchige Chathuri Dhananjana', img: chathuriDhananjana },
+    { name: 'Chathuri Dhananjana', img: chathuriDhananjana },
     { name: 'Thanarajan Vidhushika', img: thanarajanVidhushika },
 ];
 
 const juniorSecretaryTeam = [
-    { name: 'Haputhanthirige Kaveesha Nimmani Wickramarathna', img: nimmaniWickramarathna },
+    { name: 'Nimmani Wickramarathna', img: nimmaniWickramarathna },
     { name: 'Sureshkumar Nogini', img: sureshkumarNogini },
     { name: 'Ajmal Khan Afrin Jeehan', img: ajmalKhanAfrin },
 ];
 
 const juniorDesignTeam = [
-    { name: 'Mohamed Nasartheen Mohamed Sajith Nuski', img: sajithNuski },
-    { name: 'Galle Jayawickrama Sasindu Sandeepa', img: sasinduSandeepa },
+    { name: 'Mohamed Sajith Nuski', img: sajithNuski },
+    { name: 'Sasindu Sandeepa', img: sasinduSandeepa },
     { name: 'Fathima Nuha Nazardeen', img: fathimaNuha },
     { name: 'Kavisana Kanthavanesan', img: kavisanaKanthavanesan },
     { name: 'Quintus Jonath', img: quintusJonath },
 ];
 
 const wifCoreTeam = [
-    { name: 'Balasooriya Lekamlage Avindi Rashara Balasooriya', img: balasooriyaAvindi },
-    { name: 'Geekiyanage Devindi Uthpala Jayaweera', img: geekiyanageDevindi },
+    { name: 'Rashara Balasooriya', img: balasooriyaAvindi },
+    { name: 'Uthpala Jayaweera', img: geekiyanageDevindi },
     { name: 'Kanishka Ratnakumar', img: kanishkaRatnakumar },
-    { name: 'Galabodagedra Thakshila Nawodya Galabodage', img: galabodageThakshila },
-    { name: 'Himali Maheshika Thennakoon', img: himaliThennakoon },
-    { name: 'Loku Thambugalage Asha Janeshwari', img: ashaJaneshwari },
+    { name: 'Nawodya Galabodage', img: galabodageThakshila },
+    { name: 'Maheshika Thennakoon', img: himaliThennakoon },
+    { name: 'Asha Janeshwari', img: ashaJaneshwari },
 ];
 
 // --- UPDATE THIS DATA ARRAY IN HomePage.jsx ---
@@ -280,21 +286,30 @@ const galleryImages = [
     { src: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=60', alt: 'Students networking', event: 'Community Meetup' },
 ];
 
-// Helper component to display a grid of team members
+
+// Helper component to display a grid of team members (Corrected for Centering)
 const TeamGrid = ({ teamData }) => (
   <motion.div
-    key={JSON.stringify(teamData)} // Use a unique key for AnimatePresence to work
+    key={JSON.stringify(teamData)}
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
     exit={{ opacity: 0, y: -20 }}
     transition={{ duration: 0.4 }}
-    className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-7 gap-x-8 gap-y-12"
+    className="flex flex-wrap justify-center gap-x-8 gap-y-12"
   >
     {teamData.map((member, i) => (
       <div key={i} className="text-center flex flex-col items-center group">
-        <motion.div whileHover={{ scale: 1.1, y: -10 }} transition={{ type: 'spring', stiffness: 300 }} className="relative w-28 h-28 md:w-32 md:h-32 mb-4">
+        <motion.div
+          whileHover={{ scale: 1.1, y: -10 }}
+          transition={{ type: 'spring', stiffness: 300 }}
+          className="relative w-28 h-28 md:w-32 md:h-32 mb-4"
+        >
           <div className="absolute inset-0 bg-teal-500 rounded-full blur-md opacity-0 group-hover:opacity-40 transition-opacity duration-300"></div>
-          <img src={member.img} alt={member.name} className="relative w-full h-full rounded-full object-cover border-4 border-gray-700 group-hover:border-teal-400 transition-colors duration-300" />
+          <img
+            src={member.img}
+            alt={member.name}
+            className="relative w-full h-full rounded-full object-cover border-4 border-gray-700 group-hover:border-teal-400 transition-colors duration-300"
+          />
         </motion.div>
         <h4 className="font-semibold text-white">{member.name}</h4>
       </div>
@@ -302,26 +317,6 @@ const TeamGrid = ({ teamData }) => (
   </motion.div>
 );
 
-// Helper component for Junior Committee subgroups
-const TeamSubgroup = ({ title, members }) => (
-  <motion.div className="mb-20" initial="hidden" whileInView="visible" variants={containerVariant} viewport={{ once: true }}>
-    <motion.h3 variants={itemVariant} className="text-3xl font-bold text-teal-400 mb-10 border-b-2 border-gray-700 pb-4 inline-block tracking-wider">
-      {title}
-    </motion.h3>
-    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-7 gap-x-8 gap-y-12">
-      {members.map((member, i) => (
-        <motion.div key={i} variants={itemVariant} className="text-center flex flex-col items-center group">
-          <motion.div whileHover={{ scale: 1.1, y: -10 }} transition={{ type: 'spring', stiffness: 300 }} className="relative w-28 h-28 md:w-32 md:h-32 mb-4">
-            <div className="absolute inset-0 bg-teal-500 rounded-full blur-md opacity-0 group-hover:opacity-40 transition-opacity duration-300"></div>
-            <img src={member.img} alt={member.name} className="relative w-full h-full rounded-full object-cover border-4 border-gray-700 group-hover:border-teal-400 transition-colors duration-300" />
-          </motion.div>
-          <h4 className="font-semibold text-white">{member.name}</h4>
-          {member.role && <p className="text-sm text-gray-500">{member.role}</p>}
-        </motion.div>
-      ))}
-    </div>
-  </motion.div>
-);
 
 const HomePage = () => {
   const [activeJuniorTab, setActiveJuniorTab] = useState('Technical'); 
@@ -529,6 +524,8 @@ We build open, inclusive technology together. Our community welcomes everyone, v
 
 {/* 5. NEW TESTIMONIALS SLIDER SECTION */}
 <TestimonialSlider testimonials={testimonials} />
+
+
  {/* === RECENT UPDATES SECTION (with Action Buttons) === */}
 <section id='events-section' className="py-24 bg-gray-900">
   <div className="container mx-auto px-6">
