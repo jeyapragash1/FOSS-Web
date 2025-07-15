@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { TypeAnimation } from 'react-type-animation';
 import { Link } from 'react-scroll';
+import { Link as RouterLink } from 'react-router-dom';
 import TestimonialSlider from '../components/TestimonialSlider';
 import EventModal from'../components/EventModal';
 
