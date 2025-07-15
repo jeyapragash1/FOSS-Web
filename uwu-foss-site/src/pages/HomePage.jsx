@@ -1,12 +1,20 @@
+// src/pages/HomePage.jsx
+
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { TypeAnimation } from 'react-type-animation';
+import { Link } from 'react-scroll';
 import TestimonialSlider from '../components/TestimonialSlider';
+import EventModal from'../components/EventModal';
+
+// CORRECTED & CONSOLIDATED IMPORT for all icons used on this page
 import { 
   ChevronLeft, ChevronRight, Quote, Calendar, Clock, MapPin, 
   Target, Eye, Award, Code, Users, BookOpen, ShieldCheck, 
   Sparkles, Key, Camera 
 } from 'lucide-react';
+
+// --- DATA IMPORTS (from your data file) ---
 import {
   executiveCommittee,
   juniorTechnicalTeam,
@@ -22,6 +30,7 @@ import {
   focusAreas,
   galleryImages
 } from '../data/homePageData';
+
 import heroVideo from '../assets/videos/v3.mp4';
 
 // Animation variants for framer-motion grids and items
@@ -74,19 +83,83 @@ const TeamGrid = ({ teamData }) => (
 );
 
 const HomePage = () => {
-  const [activeJuniorTab, setActiveJuniorTab] = useState('Technical'); 
+ const [activeJuniorTab, setActiveJuniorTab] = useState('Technical');
+  const [selectedEvent, setSelectedEvent] = useState(null);
+  
+  const openModal = (event) => setSelectedEvent(event);
+  const closeModal = () => setSelectedEvent(null);
   return (
     <div className="digital-lines-background text-white">
-      {/* HERO SECTION */}
-      <section id="hero-section" className="relative flex items-center justify-center h-screen text-center overflow-hidden">
-        <video src={heroVideo} autoPlay loop muted playsInline className="absolute top-0 left-0 w-full h-full object-cover z-0" />
-        <div className="absolute inset-0 bg-black/60 z-10"></div>
-        <motion.div className="relative z-20" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
-          <motion.p className="text-lg md:text-xl text-teal-300 tracking-widest uppercase" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1, delay: 0.5 }}>Welcome To</motion.p>
-          <TypeAnimation sequence={[1000, 'FOSS Uva Wellassa University']} wrapper="h1" speed={50} cursor={true} className="text-5xl md:text-7xl font-extrabold text-white my-4" />
-          <motion.p className="text-lg md:text-xl text-gray-200" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1, delay: 3.5 }}>The Free And Open Source Software Community</motion.p>
-        </motion.div>
-      </section>
+   {/* === 1. HERO SECTION (Corrected with Call to Action) === */}
+<section id="hero-section" className="relative flex items-center justify-center h-screen text-center overflow-hidden">
+  
+  {/* The Video Background Layer */}
+  <video 
+    src={heroVideo} 
+    autoPlay 
+    loop 
+    muted 
+    playsInline
+    className="absolute top-0 left-0 w-full h-full object-cover z-0"
+  >
+    Your browser does not support the video tag.
+  </video>
+
+  {/* The Darkening Overlay for Text Readability */}
+  <div className="absolute inset-0 bg-black/60 z-10"></div>
+
+  {/* The Content Layer */}
+  <motion.div 
+    className="relative z-20" 
+    initial={{ opacity: 0 }} 
+    animate={{ opacity: 1 }} 
+    transition={{ duration: 0.5 }}
+  >
+    <motion.p 
+      className="text-lg md:text-xl text-teal-300 tracking-widest uppercase" 
+      initial={{ opacity: 0 }} 
+      animate={{ opacity: 1 }} 
+      transition={{ duration: 1, delay: 0.5 }}
+    >
+      Welcome To
+    </motion.p>
+    
+    <TypeAnimation 
+      sequence={[1000, 'FOSS Uva Wellassa University']} 
+      wrapper="h1" 
+      speed={50} 
+      cursor={true} 
+      className="text-5xl md:text-7xl font-extrabold text-white my-4" 
+    />
+    
+    <motion.p 
+      className="text-lg md:text-xl text-gray-200" 
+      initial={{ opacity: 0 }} 
+      animate={{ opacity: 1 }} 
+      transition={{ duration: 1, delay: 3.5 }}
+    >
+      The Free And Open Source Software Community
+    </motion.p>
+
+    {/* --- THIS IS THE MISSING CALL TO ACTION BUTTON --- */}
+    <motion.div
+      initial={{ opacity: 0, scale: 0.5 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ type: 'spring', stiffness: 150, delay: 4 }} // Animates in last
+    >
+      <a 
+        href="https://forms.gle/your_google_form_link" // Remember to put your real form link here
+        target="_blank" 
+        rel="noopener noreferrer" 
+        className="mt-8 inline-block bg-white text-gray-900 font-bold py-3 px-8 rounded-full text-lg hover:bg-opacity-90 transition transform hover:scale-105 shadow-2xl"
+      >
+        Start Your Journey
+      </a>
+    </motion.div>
+    
+  </motion.div>
+  
+</section>
 
       {/* ABOUT SECTION */}
       <section id="about-section" className="py-24 bg-gray-900 overflow-hidden">
@@ -274,57 +347,61 @@ const HomePage = () => {
         <TestimonialSlider testimonials={testimonials} />
       </section>
 
-      {/* RECENT UPDATES SECTION */}
-      <section id="events-section" className="py-24 bg-gray-900">
-        <div className="container mx-auto px-6">
-          <motion.h2 
-            className="text-4xl font-bold text-center mb-16 text-white" 
-            initial={{ opacity: 0 }} 
-            whileInView={{ opacity: 1 }} 
-            viewport={{ once: true }}
-          >
-            Recent Updates
-          </motion.h2>
-          <motion.div 
-            className="grid grid-cols-1 md:grid-cols-3 gap-8"
-            variants={containerVariant}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-          >
-            {updates.map((update, i) => (
-              <motion.div 
-                key={i} 
-                variants={itemVariant}
-                whileHover={{ y: -8 }}
-                className="bg-gray-800 rounded-xl shadow-lg flex flex-col overflow-hidden group border border-gray-700/50"
+
+{/* === RECENT UPDATES SECTION (Interactive & Centered) === */}
+<section id='events-section' className="py-24 bg-gray-900/95 backdrop-blur-sm">
+  <div className="container mx-auto px-6">
+    <motion.h2 
+      className="text-4xl font-bold text-center mb-16 text-white" 
+      initial={{ opacity: 0 }} 
+      whileInView={{ opacity: 1 }} 
+      viewport={{ once: true }}
+    >
+      Recent Updates
+    </motion.h2>
+
+    {/* Flex container to center the items */}
+    <motion.div 
+      className="flex flex-wrap justify-center gap-8"
+      variants={containerVariant}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true }}
+    >
+      {updates.map((update, i) => (
+        <motion.div 
+          key={i} 
+          variants={itemVariant}
+          whileHover={{ y: -8 }}
+          className="bg-gray-800 rounded-xl shadow-lg flex flex-col overflow-hidden group border border-gray-700/50 w-full md:w-1/3 lg:w-1/4" // Adjust width as needed
+        >
+          <div className="overflow-hidden">
+            <img src={update.coverImage} alt={update.title} className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" />
+          </div>
+          <div className="p-6 flex flex-col flex-grow">
+            <div>
+              <p className="text-sm text-gray-400 mb-1">{update.date}</p>
+              <h3 className="font-bold text-xl text-white mb-2">{update.title}</h3>
+              <p className="text-gray-400 text-sm leading-relaxed">{update.desc}</p>
+            </div>
+            <div className="mt-auto pt-6">
+              <button
+                onClick={() => openModal(update)}
+                className="bg-teal-500/10 text-teal-300 border border-teal-500/30 font-bold py-2 px-4 rounded-md hover:bg-teal-500 hover:text-white transition w-full block text-center"
               >
-                <div className="overflow-hidden">
-                  <img 
-                    src={update.img} 
-                    alt={update.title} 
-                    className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                </div>
-                <div className="p-6 flex flex-col flex-grow">
-                  <div>
-                    <p className="text-sm text-gray-400 mb-1">{update.date}</p>
-                    <h3 className="font-bold text-xl text-white">{update.title}</h3>
-                  </div>
-                  <div className="mt-auto pt-6">
-                    <a 
-                      href={update.buttonLink}
-                      className="bg-teal-500/10 text-teal-300 border border-teal-500/30 font-bold py-2 px-4 rounded-md hover:bg-teal-500 hover:text-white transition w-full block text-center"
-                    >
-                      {update.buttonText}
-                    </a>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
+                {update.buttonText}
+              </button>
+            </div>
+          </div>
+        </motion.div>
+      ))}
+    </motion.div>
+  </div>
+</section>
+
+<AnimatePresence>
+  {selectedEvent && <EventModal event={selectedEvent} onClose={closeModal} />}
+</AnimatePresence>
 
       {/* UPCOMING EVENTS SECTION */}
       <section id="upcoming-events-section" className="py-24 bg-gray-900">
@@ -442,16 +519,16 @@ const HomePage = () => {
               </motion.div>
             ))}
           </motion.div>
-          <motion.div 
-            className="text-center mt-16" 
-            initial={{ opacity: 0 }} 
-            whileInView={{ opacity: 1 }} 
-            viewport={{ once: true }}
-          >
-            <a href="#" className="text-teal-400 font-semibold text-lg hover:text-white transition">
-              Explore the Full Gallery →
-            </a>
-          </motion.div>
+         <motion.div 
+    className="text-center mt-16" 
+    initial={{ opacity: 0 }} 
+    whileInView={{ opacity: 1 }} 
+    viewport={{ once: true }}
+>
+    <Link to="/gallery" className="text-teal-400 font-semibold text-lg hover:text-white transition">
+        Explore the Full Gallery →
+    </Link>
+</motion.div>
         </div>
       </section>
 

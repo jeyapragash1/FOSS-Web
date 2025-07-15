@@ -1,13 +1,19 @@
-// --- IMAGE IMPORTS ---
+// src/data/homePageData.js
+
+import React from 'react'; // THIS IS THE CRITICAL FIX: Allows JSX to be used in this file.
+import { Key, Users, Code, BookOpen, ShieldCheck, Sparkles } from 'lucide-react';
+
+// --- IMAGE IMPORTS (Corrected, Organized, and No Duplicates) ---
+
+// Executive Committee
 import sachinduKavishka from '../assets/images/xcom/Club le/Sachindu Kavishka.jpg';
 import wasanaNilakshi from '../assets/images/xcom/Sec/Wasana Nilakshi.jpg';
 import rashmiRuwanthika from '../assets/images/xcom/Sec/Rashmi Ruwanthika Athukorala.jpg';
-import Hasini from '../assets/images/xcom/Des-WIF/Hasini Sarathchandra.jpeg'; 
+import hasiniVimandya from '../assets/images/xcom/Des-WIF/Hasini Sarathchandra.jpeg'; 
 import kasunJahith from '../assets/images/xcom/Ev-Co/kasun bandara.jpeg'; 
 import kishoJeyapragash from '../assets/images/xcom/Tech/jp-tech-lead.PNG';
-import Kavinda from '../assets/images/xcom/Mem-Rec/Kavinda Chandrasiri.jpg';
-import Chamodya from '../assets/images/xcom/Mem-Rec/Chamodya Perera.jpg';
-import hasini from '../assets/images/xcom/Des-WIF/Hasini Sarathchandra.jpeg';
+import kavindaChamod from '../assets/images/xcom/Mem-Rec/Kavinda Chandrasiri.jpg';
+import chamodyaPerera from '../assets/images/xcom/Mem-Rec/Chamodya Perera.jpg';
 import isuriManodya from '../assets/images/xcom/P-R-L/PANAMALDENIYE R.I.M..jpg'; 
 import thinujaHettiarachchi from '../assets/images/xcom/Tech/Thinuja hettiarachchi.jpeg';
 import misalRanasinghe from '../assets/images/xcom/Des/Nisal Ranasinghe.jpeg';
@@ -16,7 +22,7 @@ import tharinduDevinda from '../assets/images/xcom/Tresu/Tharindu devinda.jpg';
 import nilakshanRaveendran from '../assets/images/xcom/Des/NILAKSHAN R..jpg';
 import bhagyaLakshan from '../assets/images/xcom/Mar/MADHUSHANKA R.M.B.L..jpg';
 
-// --- JUNIOR COMMITTEE IMAGE IMPORTS ---
+// Junior Committee
 import kavisanaKanthavanesan from '../assets/images/jxcom/Design/KANTHAVANESAN K.jpeg';
 import sajithNuski from '../assets/images/jxcom/Design/M.N.M.S. Nuski.jpg';
 import fathimaNuha from '../assets/images/jxcom/Design/NUHA M.N.F.jpg';
@@ -46,7 +52,21 @@ import kanishkaRatnakumar from '../assets/images/jxcom/WIF/K. Ratnakumar.jpg';
 import galabodageThakshila from '../assets/images/jxcom/WIF/Nawodya Galabodage.jpg';
 import himaliThennakoon from '../assets/images/jxcom/WIF/THENNAKOON T.M.T.G.H.M..jpeg';
 
-// --- DATA ARRAYS ---
+// Event Images
+import devCampImg1 from '../assets/images/Events/E1-1.jpg';
+import devCampImg2 from '../assets/images/Events/E1-2.jpg';
+import devCampImg3 from '../assets/images/Events/E1-3.jpg';
+import devCampImg4 from '../assets/images/Events/E1-4.jpg';
+import devCampImg5 from '../assets/images/Events/E1-5.jpg';
+import githubWorkshopImg1 from '../assets/images/Events/E2-1.jpg';
+import githubWorkshopImg2 from '../assets/images/Events/E2-2.jpg';
+import githubWorkshopImg3 from '../assets/images/Events/E2-3.jpg';
+import githubWorkshopImg4 from '../assets/images/Events/E2-4.jpg';
+import githubWorkshopImg5 from '../assets/images/Events/E2-5.jpg';
+
+
+// --- DATA ARRAYS (with `export` keyword and corrected variables) ---
+
 export const executiveCommittee = [
   { name: 'Sachindu Kavishka', role: 'Club Lead', img: sachinduKavishka },
   { name: 'Wasana Nilakshi', role: 'Secretary', img: wasanaNilakshi },
@@ -56,13 +76,13 @@ export const executiveCommittee = [
   { name: 'Isuri Manodya', role: 'Public Relations Lead', img: isuriManodya },
   { name: 'Bhagya Lakshan', role: 'Marketing & Publicity Lead', img: bhagyaLakshan },
   { name: 'Kasun Janith Bandara', role: 'Event Coordinator', img: kasunJahith },
-  { name: 'Kavinda Chamod', role: 'Membership & Recruit Lead', img: Kavinda },
-  { name: 'Chamodya Perera', role: 'Membership & Recruit Lead', img: Chamodya },
+  { name: 'Kavinda Chamod', role: 'Membership & Recruit Lead', img: kavindaChamod },
+  { name: 'Chamodya Perera', role: 'Membership & Recruit Lead', img: chamodyaPerera },
   { name: 'Kisho Jeyapragash', role: 'Technical Manager', img: kishoJeyapragash },
   { name: 'Thinuja Hettiarachchi', role: 'Technical Manager', img: thinujaHettiarachchi },
   { name: 'Misal Ranasinghe', role: 'Design Lead', img: misalRanasinghe },
   { name: 'Nilakshan Raveendran', role: 'Design Lead', img: nilakshanRaveendran },
-  { name: 'Hasini Sarathchandra', role: 'Design Lead - WIF', img: hasini },
+  { name: 'Hasini Vimandya', role: 'Design Lead - WIF', img: hasiniVimandya },
 ];
 
 export const juniorTechnicalTeam = [
@@ -112,47 +132,29 @@ export const wifCoreTeam = [
 ];
 
 export const testimonials = [
-    { 
-        quote: "In the FOSS community, I found more than skills. I found support, purpose, and people who truly care.", 
-        name: 'Sachindu Kavishka', 
-        role: '3rd Year, Computer Science', 
-        img: sachinduKavishka
-    },
-    { 
-        quote: "The FOSS community is where freedom meets code, and strangers become collaborators. It’s not just about software. it’s about shaping the future, together.", 
-        name: 'Kisho Jeyapragash', 
-        role: '3rd Year, IIT', 
-        img: kishoJeyapragash 
-    },
-    { 
-        quote: "I think the FOSS community feels like a global team with a shared dream open, accessible technology for all.", 
-        name: 'Rashmi Ruwanthika', 
-        role: '3rd Year, Computer Science', 
-        img: rashmiRuwanthika
-    },
+    { quote: "In the FOSS community, I found more than skills. I found support, purpose, and people who truly care.", name: 'Sachindu Kavishka', role: '3rd Year, Computer Science', img: sachinduKavishka },
+    { quote: "The FOSS community is where freedom meets code, and strangers become collaborators. It’s not just about software. it’s about shaping the future, together.", name: 'Kisho Jeyapragash', role: '3rd Year, IIT', img: kishoJeyapragash },
+    { quote: "I think the FOSS community feels like a global team with a shared dream open, accessible technology for all.", name: 'Rashmi Ruwanthika', role: '3rd Year, Computer Science', img: rashmiRuwanthika },
 ];
 
 export const updates = [
     { 
-        date: 'March 15, 2024', 
-        title: 'Open Source AI Workshop', 
-        img: 'https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&w=800&q=60',
-        buttonText: 'Register Now',
-        buttonLink: '#'
+        date: 'October 26, 2024', 
+        title: 'DevCamp Coding Bootcamp', 
+        desc: 'Students engaged in workshops, coding challenges, and team projects to strengthen their development skills.',
+        coverImage: devCampImg1,
+        buttonText: 'Explore DevCamp',
+        details: "The FOSS Community at Uva Wellassa University recently hosted DevCamp, an event designed to help students strengthen their coding skills through practical experience and collaboration.\n\nThroughout the camp, students engaged in interactive workshops, coding challenges, and team-based projects. They explored real-world development practices and learned how to work effectively in groups.\n\nDevCamp was a great chance for students to discover new tools, learn from mentors, and build confidence in software development. We appreciate everyone who participated and contributed to the success of this event. Stay connected with FOSS UWU for more learning opportunities ahead!",
+        gallery: [devCampImg1, devCampImg2, devCampImg3, devCampImg4, devCampImg5]
     },
     { 
-        date: 'March 10, 2024', 
-        title: 'New Project: "Agri-Bot"', 
-        img: 'https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&w=800&q=60',
-        buttonText: 'Learn More',
-        buttonLink: '#'
-    },
-    { 
-        date: 'March 5, 2024', 
-        title: 'Industry Speaker Series', 
-        img: 'https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&w=800&q=60',
-        buttonText: 'Learn More',
-        buttonLink: '#'
+        date: 'October 15, 2024', 
+        title: 'GitHub Essentials Workshop', 
+        desc: 'A beginner-friendly session covering Git, repositories, commits, and pull requests for open-source collaboration.',
+        coverImage: githubWorkshopImg1,
+        buttonText: 'Workshop Details',
+        details: "The FOSS Community of Uva Wellassa University recently organized a GitHub Essentials Workshop to help students understand the basics of version control and open-source collaboration.\n\nThis beginner-friendly session covered important topics such as Git, GitHub, creating repositories, making commits, and working with pull requests. A live demo helped participants follow along and try things themselves.\n\nThe workshop was a great starting point for students who are new to GitHub. Everyone gained valuable knowledge and confidence to begin their open-source journey.",
+        gallery: [githubWorkshopImg1, githubWorkshopImg2, githubWorkshopImg3, githubWorkshopImg4, githubWorkshopImg5]
     },
 ];
 
@@ -171,46 +173,22 @@ export const events = [
         time: '9:00 AM - 4:00 PM',
         location: 'Innovation Center',
         desc: 'Explore the latest advancements in open-source AI, from large language models to computer vision.',
-        img: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=800&q=80'
+        img: 'https://images.unsplash.com/photo-1678453147378-b5454555b6a7?auto=format&fit=crop&w=800&q=80'
     },
     { 
         title: 'React Hands-on Workshop', 
         date: 'December 10, 2023', 
         time: '1:00 PM - 3:00 PM',
         location: 'Computer Lab 01',
-        desc: 'A hands-on workshop for aspiring web developers. Build a complete app from scratch with React.',
-        img: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=800&q=80'
+        desc: 'A hands-on workshop for aspiring web developers using React.',
+        img: 'https://images.unsplash.com/photo-1555066931-4365d1469cbe?auto=format&fit=crop&w=800&q=80'
     },
 ];
 
 export const blogPosts = [
-    { 
-        slug: 'mastering-git-and-github', 
-        title: 'Mastering Git & GitHub', 
-        img: 'https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?auto=format&fit=crop&w=800&q=60',
-        category: 'Tutorial',
-        excerpt: 'A beginner\'s guide to version control that every developer needs. Learn the fundamentals of Git and how to collaborate on GitHub.',
-        authorName: 'Asiri Weerasinghe',
-        authorImg: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=100&q=80'
-    },
-    { 
-        slug: 'why-you-should-learn-linux', 
-        title: 'Why You Should Learn Linux', 
-        img: 'https://images.unsplash.com/photo-1599658880436-c61792e70672?auto=format&fit=crop&w=800&q=60',
-        category: 'DevOps',
-        excerpt: 'Unlock the power of the command line and understand the backbone of the internet and cloud infrastructure.',
-        authorName: 'Chandima Jayawardana',
-        authorImg: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=100&q=80'
-    },
-    { 
-        slug: 'intro-to-modern-web-dev', 
-        title: 'Intro to Modern Web Dev', 
-        img: 'https://images.unsplash.com/photo-1593720213428-28a5b9e94613?auto=format&fit=crop&w=800&q=60',
-        category: 'Community',
-        excerpt: 'A look into the React ecosystem and a recap of our latest workshop on building modern web applications.',
-        authorName: 'Raees Ahamed',
-        authorImg: 'https://images.unsplash.com/photo-1624561172888-ac93c696e10c?auto=format&fit=crop&w=100&q=80'
-    },
+    { slug: 'mastering-git-and-github', title: 'Mastering Git & GitHub', img: 'https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?auto=format&fit=crop&w=800&q=60', category: 'Tutorial', excerpt: 'A beginner\'s guide to version control that every developer needs.', authorName: 'Asiri Weerasinghe', authorImg: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=100&q=80' },
+    { slug: 'why-you-should-learn-linux', title: 'Why You Should Learn Linux', img: 'https://images.unsplash.com/photo-1599658880436-c61792e70672?auto=format&fit=crop&w=800&q=60', category: 'DevOps', excerpt: 'Unlock the power of the command line and understand the backbone of the internet.', authorName: 'Chandima Jayawardana', authorImg: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=100&q=80' },
+    { slug: 'intro-to-modern-web-dev', title: 'Intro to Modern Web Dev', img: 'https://images.unsplash.com/photo-1593720213428-28a5b9e94613?auto=format&fit=crop&w=800&q=60', category: 'Community', excerpt: 'A look into the React ecosystem and a recap of our latest workshop.', authorName: 'Raees Ahamed', authorImg: 'https://images.unsplash.com/photo-1624561172888-ac93c696e10c?auto=format&fit=crop&w=100&q=80' },
 ];
 
 export const focusAreas = [
@@ -223,9 +201,9 @@ export const focusAreas = [
 ];
 
 export const galleryImages = [
-    { src: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=1200&q=80', alt: 'Speaker at a conference', event: 'FOSSYCon 2024', layout: 'col-span-2 row-span-2' },
-    { src: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=800&q=60', alt: 'Students in a workshop', event: 'React Workshop' },
-    { src: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=800&q=60', alt: 'Group discussion at an event', event: 'AI Summit' },
+    { src: devCampImg1, alt: 'Speaker at a conference', event: 'DevCamp 2024', layout: 'col-span-2 row-span-2' },
+    { src: githubWorkshopImg1, alt: 'Students in a workshop', event: 'GitHub Workshop' },
+    { src: devCampImg3, alt: 'Group discussion at an event', event: 'DevCamp 2024' },
     { src: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=800&q=60', alt: 'Team collaborating on laptops', event: 'Hackathon' },
-    { src: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=60', alt: 'Students networking', event: 'Community Meetup' },
+    { src: devCampImg5, alt: 'Students networking', event: 'DevCamp 2024' },
 ];

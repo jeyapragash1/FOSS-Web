@@ -7,7 +7,9 @@ import HomePage from './pages/HomePage'; // The only page we need
 
 function App() {
   return (
-    <div className="bg-gray-900">
+    // THE FIX: The solid background class has been removed from this div.
+    // The "digital-lines-background" from your index.css will now be visible.
+    <div>
       <Navbar />
       <HomePage />
       <Footer />

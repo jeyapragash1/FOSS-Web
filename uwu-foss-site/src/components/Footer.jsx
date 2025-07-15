@@ -1,7 +1,7 @@
 // src/components/Footer.jsx
 
 import React from 'react';
-// CORRECTED IMPORT: We are using Link from 'react-scroll'
+// CORRECTED IMPORT: We are using Link from 'react-scroll' for the single-page app
 import { Link } from 'react-scroll'; 
 
 const Footer = () => {
