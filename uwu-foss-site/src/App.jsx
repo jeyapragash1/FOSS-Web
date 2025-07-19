@@ -1,18 +1,20 @@
 // src/App.jsx
-
 import React from 'react';
+import { Outlet, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-import HomePage from './pages/HomePage'; // The only page we need
 
 function App() {
+  const location = useLocation();
+  const isEventPage = location.pathname.startsWith('/ideathon');
+
   return (
-    // THE FIX: The solid background class has been removed from this div.
-    // The "digital-lines-background" from your index.css will now be visible.
-    <div>
-      <Navbar />
-      <HomePage />
-      <Footer />
+    <div className={isEventPage ? '' : 'digital-lines-background text-white'}>
+      {!isEventPage && <Navbar />}
+      <main>
+        <Outlet />
+      </main>
+      {!isEventPage && <Footer />}
     </div>
   );
 }

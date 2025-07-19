@@ -1,0 +1,13 @@
+.light-grid-background {
+  background-color: #f8fafc; /* A very light, clean gray (slate-50) */
+  background-image:
+    linear-gradient(rgba(6, 182, 212, 0.1) 1px, transparent 1px), /* A faint cyan */
+    linear-gradient(90deg, rgba(6, 182, 212, 0.1) 1px, transparent 1px);
+  background-size: 4rem 4rem;
+  animation: pan-lines-light 90s linear infinite;
+}
+
+@keyframes pan-lines-light {
+  0% { background-position: 0 0; }
+  100% { background-position: 256rem 256rem; }
+}
