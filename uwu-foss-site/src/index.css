@@ -66,3 +66,19 @@
   0% { background-position: 0 0; }
   100% { background-position: 256rem 256rem; }
 }
+/* src/index.css -- Add this at the bottom */
+
+/* NEW: Dark theme animated grid for the Ideathon page */
+.dark-grid-background {
+  background-color: #020617; /* A deep, dark navy blue */
+  background-image:
+    linear-gradient(rgba(0, 255, 255, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 255, 0.07) 1px, transparent 1px);
+  background-size: 3rem 3rem;
+  animation: pan-lines-dark 90s linear infinite;
+}
+
+@keyframes pan-lines-dark {
+  0% { background-position: 0 0; }
+  100% { background-position: 256rem 256rem; }
+}

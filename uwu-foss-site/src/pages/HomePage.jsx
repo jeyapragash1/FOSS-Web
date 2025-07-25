@@ -8,6 +8,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import TestimonialSlider from '../components/TestimonialSlider';
 import EventModal from'../components/EventModal';
 
+
 // CORRECTED & CONSOLIDATED IMPORT for all icons used on this page
 import { 
   ChevronLeft, ChevronRight, Quote, Calendar, Clock, MapPin, 
