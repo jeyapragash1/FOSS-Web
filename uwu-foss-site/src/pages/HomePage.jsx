@@ -7,8 +7,7 @@ import { Link } from 'react-scroll';
 import { Link as RouterLink } from 'react-router-dom';
 import TestimonialSlider from '../components/TestimonialSlider';
 import EventModal from'../components/EventModal';
-
-
+import GalleryPage from'./GalleryPage';
 // CORRECTED & CONSOLIDATED IMPORT for all icons used on this page
 import { 
   ChevronLeft, ChevronRight, Quote, Calendar, Clock, MapPin, 
@@ -485,54 +484,55 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* GALLERY SECTION */}
-      <section id="gallery-section" className="py-24 bg-gray-900">
-        <div className="container mx-auto px-6 text-center">
-          <motion.h2 
-            className="text-4xl font-bold mb-16 text-white" 
-            initial={{ opacity: 0 }} 
-            whileInView={{ opacity: 1 }} 
-            viewport={{ once: true }}
-          >
-            Community in Action
-          </motion.h2>
-          <motion.div 
-            className="grid grid-cols-2 md:grid-cols-4 gap-4 h-auto md:h-[600px] md:grid-rows-2"
-            variants={containerVariant}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-          >
-            {galleryImages.map((image, i) => (
-              <motion.div 
-                key={i} 
-                variants={itemVariant} 
-                className={`relative rounded-xl overflow-hidden shadow-lg group ${image.layout || ''}`}
-              >
-                <img 
-                  src={image.src} 
-                  alt={image.alt} 
-                  className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500 ease-in-out" 
-                />
-                <div className="absolute inset-0 bg-black/70 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <Camera className="w-8 h-8 text-white mb-2" />
-                  <p className="text-white font-bold text-lg">{image.event}</p>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-         <motion.div 
-    className="text-center mt-16" 
-    initial={{ opacity: 0 }} 
-    whileInView={{ opacity: 1 }} 
-    viewport={{ once: true }}
->
-    <Link to="/gallery" className="text-teal-400 font-semibold text-lg hover:text-white transition">
-        Explore the Full Gallery →
-    </Link>
-</motion.div>
-        </div>
-      </section>
+  {/* === 9. GALLERY SECTION (Corrected Link) === */}
+<section id="gallery-section" className="py-24 bg-gray-900/95 backdrop-blur-sm">
+  <div className="container mx-auto px-6 text-center">
+    <motion.h2 
+      className="text-4xl font-bold mb-16 text-white" 
+      initial={{ opacity: 0 }} 
+      whileInView={{ opacity: 1 }} 
+      viewport={{ once: true }}
+    >
+      Community in Action
+    </motion.h2>
+    <motion.div 
+      className="grid grid-cols-2 md:grid-cols-4 gap-4 h-auto md:h-[600px] md:grid-rows-2"
+      variants={containerVariant}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true }}
+    >
+      {galleryImages.map((image, i) => (
+        <motion.div 
+          key={i} 
+          variants={itemVariant} 
+          className={`relative rounded-xl overflow-hidden shadow-lg group ${image.layout || ''}`}
+        >
+          <img 
+            src={image.src} 
+            alt={image.alt} 
+            className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500 ease-in-out" 
+          />
+          <div className="absolute inset-0 bg-black/70 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <Camera className="w-8 h-8 text-white mb-2" />
+            <p className="text-white font-bold text-lg">{image.event}</p>
+          </div>
+        </motion.div>
+      ))}
+    </motion.div>
+    <motion.div 
+      className="text-center mt-16" 
+      initial={{ opacity: 0 }} 
+      whileInView={{ opacity: 1 }} 
+      viewport={{ once: true }}
+    >
+      {/* THIS IS THE CORRECTED LINK, USING THE ROUTER LINK */}
+     <RouterLink to="/gallery" className="text-teal-400 font-semibold text-lg hover:text-white transition">
+      Explore the Full Gallery →
+  </RouterLink>
+    </motion.div>
+  </div>
+</section>
 
       {/* JOIN US CTA */}
       <section

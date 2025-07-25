@@ -41,13 +41,50 @@ const teamMembers = [
     { name: 'Fathima Rushdha', role: 'Marketing Coordinator', img: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80' },
     { name: 'Raees Ahamed', role: 'Financial Coordinator', img: 'https://images.unsplash.com/photo-1624561172888-ac93c696e10c?auto=format&fit=crop&w=400&q=80' },
 ];
+// --- UPDATE THIS DATA ARRAY IN HomePage.jsx ---
+
 const partners = [
-    { name: 'GitHub', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original-wordmark.svg' },
-    { name: 'DigitalOcean', logo: 'https://www.digitalocean.com/_next/static/media/logo.87a8f3b8.svg' },
-    { name: 'WSO2', logo: 'https://wso2.com/images/logo.svg' },
-    { name: '99x', logo: 'https://99x.io/images/99x-logo.svg' },
-    { name: 'SLASSCOM', logo: 'https://slasscom.lk/wp-content/uploads/2021/04/slasscom-logo.png' },
+    { 
+        name: 'WSO2', 
+        logo: 'https://wso2.com/images/logo-light.svg', // Light version of the logo
+        url: 'https://wso2.com/' 
+    },
+    { 
+        name: '99x', 
+        logo: 'https://99x.io/images/99x-logo-white.svg', // Light version of the logo
+        url: 'https://99x.io/' 
+    },
+    { 
+        name: 'GitHub', 
+        logo: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/github/github-original.svg', // Using an SVG icon
+        url: 'https://github.com/' 
+    },
+    { 
+        name: 'DigitalOcean', 
+        logo: 'https://www.digitalocean.com/_next/static/media/logo-white.b36329c1.svg', // Light version of the logo
+        url: 'https://www.digitalocean.com/' 
+    },
+    { 
+        name: 'SLASSCOM', 
+        logo: 'https://slasscom.lk/wp-content/uploads/2022/07/slasscom-logo-white.png', // Light version of the logo
+        url: 'https://slasscom.lk/' 
+    },
 ];
+
+// Add these animation variants at the top of IdeathonPage.jsx
+
+const containerVariant = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.1 }
+  }
+};
+
+const itemVariant = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0 }
+};
 
 const IdeathonPage = () => {
   const [isNavOpen, setNavOpen] = useState(false);
@@ -69,7 +106,7 @@ const IdeathonPage = () => {
       {/* --- Ideathon Navbar --- */}
       <nav className={cn("fixed top-0 w-full z-50 transition-all duration-300", scrolled ? "bg-slate-900/80 backdrop-blur-md shadow-lg" : "bg-transparent")}>
         <div className="container mx-auto px-6 flex justify-between items-center h-20">
-          <NavLink to="/" className="text-sm font-semibold text-gray-300 hover:text-white transition">← Back to FOSS Site</NavLink>
+          <NavLink to="/" className="text-sm font-semibold text-gray-300 hover:text-white transition">← Back to FOSS UWU</NavLink>
           <div className="hidden lg:flex items-center space-x-6">
             {navLinks.map(link => (
               // CORRECTED: Added activeClass to highlight the current section
@@ -141,11 +178,11 @@ const IdeathonPage = () => {
         <h2 className="text-4xl font-bold text-center text-white mb-20">Event Timeline</h2>
         <div className="relative max-w-3xl mx-auto">
           {/* The vertical line */}
-          <div className="absolute left-0 top-0 h-full w-0.5 bg-gray-700 translate-x-4"></div>
+          <div className="absolute left-4 top-0 h-full w-0.5 bg-gray-700"></div>
           {timelineEvents.map((event, i) => (
-            <motion.div key={i} className="relative pl-12 mb-12" initial={{opacity:0, x:-20}} whileInView={{opacity:1, x:0}} viewport={{once:true}} transition={{duration:0.5, delay:i*0.2}}>
-              {/* CORRECTED: The icon is now correctly positioned on the line */}
-              <div className="absolute left-0 top-1 w-8 h-8 bg-teal-500 text-white rounded-full flex items-center justify-center z-10 ring-8 ring-slate-900">{event.icon}</div>
+            <motion.div key={i} className="relative pl-16 mb-12" initial={{opacity:0, x:-20}} whileInView={{opacity:1, x:0}} viewport={{once:true}} transition={{duration:0.5, delay:i*0.2}}>
+              {/* CORRECTED: The icon is now perfectly centered on the line */}
+              <div className="absolute left-4 top-1 -translate-x-1/2 w-8 h-8 bg-teal-500 text-white rounded-full flex items-center justify-center z-10 ring-8 ring-slate-900">{event.icon}</div>
               <div className="bg-gray-800/80 backdrop-blur-sm p-6 rounded-lg shadow-lg border border-gray-700">
                 <h3 className="font-bold text-xl text-white">{event.title}</h3>
                 <p className="text-teal-400 font-semibold mb-2">{event.date}</p>
@@ -181,15 +218,55 @@ const IdeathonPage = () => {
         </Swiper>
       </Section>
 
-      {/* --- Partners Section --- */}
-      <Section id="partners" className="bg-gray-900/80 backdrop-blur-sm">
-        <h2 className="text-4xl font-bold text-center text-white mb-12">Our Valued Partners</h2>
-        {/* CORRECTED: Removed the filter that was hiding the logos */}
-        <div className="flex flex-wrap justify-center items-center gap-x-16 gap-y-10 filter invert">
-            {partners.map(p => (<div key={p.name} className="text-center opacity-60 hover:opacity-100 transition"><img src={p.logo} alt={p.name} className="h-10 mx-auto" /></div>))}
-        </div>
-      </Section>
+    {/* === PARTNERS SECTION (Corrected & Styled like the Image) === */}
+<Section id="partners" className="bg-gray-900/80 backdrop-blur-sm">
+  <motion.h2 
+    className="text-4xl font-bold text-center text-white mb-16"
+    initial={{ opacity: 0 }}
+    whileInView={{ opacity: 1 }}
+    viewport={{ once: true }}
+  >
+    Our Valued Partners
+  </motion.h2>
 
+  <motion.div 
+    className="flex flex-wrap justify-center items-center gap-x-12 md:gap-x-16 gap-y-10"
+    variants={containerVariant}
+    initial="hidden"
+    whileInView="visible"
+    viewport={{ once: true }}
+  >
+    {partners.map((partner, i) => (
+      <motion.div key={i} variants={itemVariant}>
+        <a 
+          href={partner.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="block text-center opacity-70 hover:opacity-100 transition-opacity duration-300"
+        >
+          {/* Special case for GitHub logo with text below */}
+          {partner.name === 'GitHub' ? (
+            <div className="flex flex-col items-center">
+              <img 
+                src={partner.logo} 
+                alt={`${partner.name} logo`} 
+                className="max-h-12 w-auto filter invert" // Invert makes the black logo white
+              />
+              <span className="text-white font-semibold text-sm mt-2">GitHub</span>
+            </div>
+          ) : (
+            // Standard logo for all other partners
+            <img 
+              src={partner.logo} 
+              alt={`${partner.name} logo`} 
+              className="max-h-8 w-auto" // Slightly smaller height for wordmarks
+            />
+          )}
+        </a>
+      </motion.div>
+    ))}
+  </motion.div>
+</Section>
       {/* --- FAQs Section --- */}
       <Section id="faqs">
         <h2 className="text-4xl font-bold text-center text-white mb-12">Frequently Asked Questions</h2>
@@ -217,3 +294,4 @@ const IdeathonPage = () => {
 };
 
 export default IdeathonPage;
+ 

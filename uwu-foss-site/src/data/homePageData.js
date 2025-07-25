@@ -200,10 +200,18 @@ export const focusAreas = [
     { name: 'Innovation & Experimentation', icon: 'sparkles', desc: 'Providing a playground for members to experiment with new ideas and cutting-edge technologies.' },
 ];
 
+// --- ADD THIS NEW BLOCK AT THE BOTTOM of homePageData.js ---
+
+// For the dedicated Gallery Page
 export const galleryImages = [
-    { src: devCampImg1, alt: 'Speaker at a conference', event: 'DevCamp 2024', layout: 'col-span-2 row-span-2' },
-    { src: githubWorkshopImg1, alt: 'Students in a workshop', event: 'GitHub Workshop' },
-    { src: devCampImg3, alt: 'Group discussion at an event', event: 'DevCamp 2024' },
-    { src: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=800&q=60', alt: 'Team collaborating on laptops', event: 'Hackathon' },
-    { src: devCampImg5, alt: 'Students networking', event: 'DevCamp 2024' },
+  { src: devCampImg1, alt: 'Mentor helping students at DevCamp', event: 'DevCamp 2024', category: 'DevCamp' },
+  { src: devCampImg2, alt: 'Students working at DevCamp', event: 'DevCamp 2024', category: 'DevCamp' },
+  { src: devCampImg3, alt: 'A team collaborating at DevCamp', event: 'DevCamp 2024', category: 'DevCamp' },
+  { src: devCampImg4, alt: 'A student presenting at DevCamp', event: 'DevCamp 2024', category: 'DevCamp' },
+  { src: devCampImg5, alt: 'Networking at DevCamp', event: 'DevCamp 2024', category: 'DevCamp' },
+  { src: githubWorkshopImg1, alt: 'Students listening at GitHub workshop', event: 'GitHub Workshop', category: 'GitHub Workshop' },
+  { src: githubWorkshopImg2, alt: 'Close up of code at GitHub workshop', event: 'GitHub Workshop', category: 'GitHub Workshop' },
+  { src: githubWorkshopImg3, alt: 'Group photo at GitHub workshop', event: 'GitHub Workshop', category: 'GitHub Workshop' },
+  { src: githubWorkshopImg4, alt: 'Q&A session at GitHub workshop', event: 'GitHub Workshop', category: 'GitHub Workshop' },
+  { src: githubWorkshopImg5, alt: 'Hands-on practice at GitHub workshop', event: 'GitHub Workshop', category: 'GitHub Workshop' },
 ];

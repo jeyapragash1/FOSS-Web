@@ -7,7 +7,7 @@ import './index.css';
 
 import HomePage from './pages/HomePage.jsx';
 import IdeathonPage from './pages/IdeathonPage.jsx'; // Our new event page
-
+import GalleryPage from './pages/GalleryPage.jsx';
 const router = createBrowserRouter([
   {
     path: '/',
@@ -15,7 +15,10 @@ const router = createBrowserRouter([
     children: [
       { path: '/', element: <HomePage /> },
       { path: 'ideathon', element: <IdeathonPage /> },
-      // You can add more pages like a full Gallery page here later
+      { 
+        path: 'gallery', 
+        element: <GalleryPage /> 
+      },
     ],
   },
 ]);

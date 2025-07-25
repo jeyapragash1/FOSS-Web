@@ -2,7 +2,7 @@
 
 import React, { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { fullGalleryImages } from '../data/homePageData'; // We will create this in the next step
+import { galleryImages } from '../data/homePageData'; // We will create this in the next step
 
 const GalleryPage = () => {
   const [activeFilter, setActiveFilter] = useState('All');
@@ -11,9 +11,9 @@ const GalleryPage = () => {
 
   const filteredImages = useMemo(() => {
     if (activeFilter === 'All') {
-      return fullGalleryImages;
+      return galleryImages;
     }
-    return fullGalleryImages.filter(image => image.category === activeFilter);
+    return galleryImages.filter(image => image.category === activeFilter);
   }, [activeFilter]);
 
   return (
