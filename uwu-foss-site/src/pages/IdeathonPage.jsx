@@ -218,55 +218,7 @@ const IdeathonPage = () => {
         </Swiper>
       </Section>
 
-    {/* === PARTNERS SECTION (Corrected & Styled like the Image) === */}
-<Section id="partners" className="bg-gray-900/80 backdrop-blur-sm">
-  <motion.h2 
-    className="text-4xl font-bold text-center text-white mb-16"
-    initial={{ opacity: 0 }}
-    whileInView={{ opacity: 1 }}
-    viewport={{ once: true }}
-  >
-    Our Valued Partners
-  </motion.h2>
-
-  <motion.div 
-    className="flex flex-wrap justify-center items-center gap-x-12 md:gap-x-16 gap-y-10"
-    variants={containerVariant}
-    initial="hidden"
-    whileInView="visible"
-    viewport={{ once: true }}
-  >
-    {partners.map((partner, i) => (
-      <motion.div key={i} variants={itemVariant}>
-        <a 
-          href={partner.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="block text-center opacity-70 hover:opacity-100 transition-opacity duration-300"
-        >
-          {/* Special case for GitHub logo with text below */}
-          {partner.name === 'GitHub' ? (
-            <div className="flex flex-col items-center">
-              <img 
-                src={partner.logo} 
-                alt={`${partner.name} logo`} 
-                className="max-h-12 w-auto filter invert" // Invert makes the black logo white
-              />
-              <span className="text-white font-semibold text-sm mt-2">GitHub</span>
-            </div>
-          ) : (
-            // Standard logo for all other partners
-            <img 
-              src={partner.logo} 
-              alt={`${partner.name} logo`} 
-              className="max-h-8 w-auto" // Slightly smaller height for wordmarks
-            />
-          )}
-        </a>
-      </motion.div>
-    ))}
-  </motion.div>
-</Section>
+  
       {/* --- FAQs Section --- */}
       <Section id="faqs">
         <h2 className="text-4xl font-bold text-center text-white mb-12">Frequently Asked Questions</h2>

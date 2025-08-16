@@ -405,7 +405,7 @@ const HomePage = () => {
 </AnimatePresence>
 
       {/* UPCOMING EVENTS SECTION */}
-      <section id="upcoming-events-section" className="py-24 bg-gray-900">
+      {/* <section id="upcoming-events-section" className="py-24 bg-gray-900">
         <div className="container mx-auto px-6">
           <motion.h2 
             className="text-4xl font-bold text-center mb-16 text-white" 
@@ -463,7 +463,7 @@ const HomePage = () => {
             ))}
           </motion.div>
         </div>
-      </section>
+      </section> */}
 
       {/* BLOG SECTION */}
       <section id="blog-section" className="py-24 bg-gray-800">
