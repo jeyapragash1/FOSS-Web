@@ -2,8 +2,8 @@
 
 import React, { useState, useEffect } from 'react';
 // Both Link types are needed now
-import { Link as ScrollLink } from 'react-scroll'; 
-import { NavLink } from 'react-router-dom';
+import { Link as ScrollLink, scroller } from 'react-scroll'; 
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Menu, X } from "lucide-react";
 import { cn } from "../lib/utils";
@@ -13,15 +13,18 @@ import fossLogo from '../assets/images/Icon/l2.jpg';
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   // CORRECTED: We add a flag to tell the code which link type to use
   const navigation = [
     { name: "Home", to: "hero-section", isPageLink: false },
-    { name: "InnovateOSS '24", to: "/ideathon", isPageLink: true }, // This is a page link
+    { name: "DevX Challenge  '2025", to: "/ideathon", isPageLink: true }, // This is a page link
     { name: "About", to: "about-section", isPageLink: false },
     { name: "Team", to: "team-section", isPageLink: false },
     { name: "Events", to: "events-section", isPageLink: false },
-    { name: "Gallery", to: "gallery-section", isPageLink: false },
+    // Make Gallery a page link so clicking it from any route navigates to the dedicated gallery page
+    { name: "Gallery", to: "/gallery", isPageLink: true },
   ];
 
   useEffect(() => {
@@ -35,17 +38,28 @@ export default function Navbar() {
   const linkClass = "px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white transition-colors cursor-pointer";
   const activeLinkClass = "bg-teal-500 text-white";
 
+  // helper to handle Home click: if already on home, scroll; otherwise navigate with state
+  const handleHomeClick = (e) => {
+    e.preventDefault();
+    if (location.pathname === '/' || location.pathname === '') {
+      scroller.scrollTo('hero-section', { smooth: true, offset: -70, duration: 500 });
+    } else {
+      navigate('/', { state: { scrollTo: 'hero-section' } });
+    }
+    setIsMobileMenuOpen(false);
+  };
+
   return (
     <nav className={cn("sticky top-0 z-50 transition-all duration-300", scrolled ? "bg-gray-800/80 backdrop-blur-md shadow-lg" : "bg-transparent")}>
       <div className="container mx-auto px-6">
         <div className="relative flex h-20 items-center justify-between">
           
-          <ScrollLink to="hero-section" spy={true} smooth={true} offset={-70} duration={500} className="flex items-center cursor-pointer group">
+          <a onClick={handleHomeClick} className="flex items-center cursor-pointer group">
             <motion.div whileHover={{ y: -5, scale: 1.1, rotateX: 10, rotateY: -5 }} transition={{ type: "spring", stiffness: 300 }} style={{ transformStyle: "preserve-3d" }}>
               <img className="h-12 w-12 rounded-full object-cover border-2 border-gray-600 group-hover:border-teal-400 transition-all duration-300 shadow-lg" src={fossLogo} alt="FOSS UWU Logo" />
             </motion.div>
             <span className="ml-3 text-xl font-bold text-white hidden sm:block">FOSS UWU</span>
-          </ScrollLink>
+          </a>
           
           {/* CORRECTED: Desktop Navigation with conditional logic */}
           <div className="hidden sm:ml-6 sm:flex sm:space-x-1">

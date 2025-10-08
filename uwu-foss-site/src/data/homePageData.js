@@ -132,9 +132,9 @@ export const wifCoreTeam = [
 ];
 
 export const testimonials = [
-    { quote: "In the FOSS community, I found more than skills. I found support, purpose, and people who truly care.", name: 'Sachindu Kavishka', role: '3rd Year, Computer Science', img: sachinduKavishka },
-    { quote: "The FOSS community is where freedom meets code, and strangers become collaborators. It’s not just about software. it’s about shaping the future, together.", name: 'Kisho Jeyapragash', role: '3rd Year, IIT', img: kishoJeyapragash },
-    { quote: "I think the FOSS community feels like a global team with a shared dream open, accessible technology for all.", name: 'Rashmi Ruwanthika', role: '3rd Year, Computer Science', img: rashmiRuwanthika },
+    { quote: "In the FOSS community, I found more than skills. I found support, purpose, and people who truly care.", name: 'Sachindu Kavishka', role: '4th Year, Computer Science', img: sachinduKavishka },
+    { quote: "The FOSS community is where freedom meets code, and strangers become collaborators. It’s not just about software. it’s about shaping the future, together.", name: 'Kisho Jeyapragash', role: '4th Year, IIT', img: kishoJeyapragash },
+    { quote: "I think the FOSS community feels like a global team with a shared dream open, accessible technology for all.", name: 'Rashmi Ruwanthika', role: '4th Year, Computer Science', img: rashmiRuwanthika },
 ];
 
 export const updates = [

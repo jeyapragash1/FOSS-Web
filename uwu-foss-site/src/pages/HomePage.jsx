@@ -3,8 +3,9 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { TypeAnimation } from 'react-type-animation';
-import { Link } from 'react-scroll';
+import { Link, scroller } from 'react-scroll';
 import { Link as RouterLink } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import TestimonialSlider from '../components/TestimonialSlider';
 import EventModal from'../components/EventModal';
 import GalleryPage from'./GalleryPage';
@@ -26,7 +27,6 @@ import {
   wifCoreTeam,
   testimonials,
   updates,
-  events,
   blogPosts,
   focusAreas,
   galleryImages
@@ -86,9 +86,20 @@ const TeamGrid = ({ teamData }) => (
 const HomePage = () => {
  const [activeJuniorTab, setActiveJuniorTab] = useState('Technical');
   const [selectedEvent, setSelectedEvent] = useState(null);
+  const location = useLocation();
   
   const openModal = (event) => setSelectedEvent(event);
   const closeModal = () => setSelectedEvent(null);
+
+  // If we navigated here with a state asking to scroll to hero, do it on mount
+  React.useEffect(() => {
+    if (location && location.state && location.state.scrollTo === 'hero-section') {
+      // small timeout to let component mount
+      setTimeout(() => {
+        scroller.scrollTo('hero-section', { smooth: true, offset: -70, duration: 600 });
+      }, 50);
+    }
+  }, [location]);
   return (
     <div className="digital-lines-background text-white">
    {/* === 1. HERO SECTION (Corrected with Call to Action) === */}
@@ -165,20 +176,73 @@ const HomePage = () => {
       {/* ABOUT SECTION */}
       <section id="about-section" className="py-24 bg-gray-900 overflow-hidden">
         <div className="container mx-auto px-6">
-          <motion.div 
-            className="text-center mb-20"
-            initial={{ opacity: 0, y: -30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, ease: "easeOut" }}
-          >
-            <p className="text-lg font-semibold text-teal-400 tracking-widest uppercase">Who We Are</p>
-            <h2 className="text-4xl md:text-5xl font-extrabold mt-2 text-white">
-              A Community Driven by Open Collaboration
-            </h2>
-            <p className="mt-4 max-w-3xl mx-auto text-lg text-gray-400">
-              We are a dynamic community of developers, designers, and tech enthusiasts committed to professional development, technical excellence, and making a positive impact through open source.
-            </p>
+          <motion.div className="mb-20" initial={{ opacity: 0, y: -20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+              {/* Left: media (video thumbnail) */}
+              <div className="relative">
+                <div className="rounded-xl overflow-hidden border border-gray-800 shadow-lg">
+                  <video src={heroVideo} autoPlay muted loop playsInline className="w-full h-72 md:h-96 object-cover" />
+                </div>
+                <div className="absolute top-4 left-4 bg-black/30 backdrop-blur rounded-full p-2">
+                  <span className="text-xs text-teal-300 font-semibold">20 years of UWU • 2005 - 2025</span>
+                </div>
+              </div>
+
+              {/* Right: headline + bullets + icons */}
+              <div>
+                <p className="text-sm font-semibold text-teal-400 tracking-wide uppercase">Who We Are</p>
+                <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white mt-3">Uva Wellassa University & Our FOSS Community</h2>
+
+                <p className="mt-6 text-lg text-gray-300 leading-relaxed">Located in the scenic hills of Badulla, UWU was founded in 2005 to become a Center of Excellence for Value Addition. As Sri Lanka’s first entrepreneurial university, UWU blends industry-focused learning, practical research, and innovation-driven education.</p>
+
+                <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="flex items-start gap-3">
+                    <div className="p-3 bg-gray-800 rounded-lg border border-gray-700 text-teal-400">
+                      <Key size={20} />
+                    </div>
+                    <div>
+                      <h4 className="text-white font-semibold">Software Freedom</h4>
+                      <p className="text-gray-400 text-sm">Promoting openness, collaboration and accessible technology.</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-3">
+                    <div className="p-3 bg-gray-800 rounded-lg border border-gray-700 text-teal-400">
+                      <Users size={20} />
+                    </div>
+                    <div>
+                      <h4 className="text-white font-semibold">Community & WIF</h4>
+                      <p className="text-gray-400 text-sm">Empowering members with workshops, mentorship and inclusive events.</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-3">
+                    <div className="p-3 bg-gray-800 rounded-lg border border-gray-700 text-teal-400">
+                      <BookOpen size={20} />
+                    </div>
+                    <div>
+                      <h4 className="text-white font-semibold">Hands-on Learning</h4>
+                      <p className="text-gray-400 text-sm">DevCamps, GitHub workshops, and project mentorship to build real skills.</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-3">
+                    <div className="p-3 bg-gray-800 rounded-lg border border-gray-700 text-teal-400">
+                      <Sparkles size={20} />
+                    </div>
+                    <div>
+                      <h4 className="text-white font-semibold">Industry Collaboration</h4>
+                      <p className="text-gray-400 text-sm">Partnerships with companies and organizations for mentorship and exposure.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-6 flex gap-3">
+                  <a href="#join-us-section" className="inline-flex items-center gap-2 bg-teal-500 text-black font-semibold px-4 py-2 rounded-full hover:bg-teal-600 transition">Join the Community</a>
+                  <a href="/ideathon" className="inline-flex items-center gap-2 border border-gray-700 text-gray-200 px-4 py-2 rounded-full hover:border-teal-500 transition">Learn about DevX</a>
+                </div>
+              </div>
+            </div>
           </motion.div>
           {/* Three-Card Grid */}
           <motion.div 
