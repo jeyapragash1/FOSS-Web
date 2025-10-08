@@ -11,6 +11,7 @@ import wasanaNilakshi from '../assets/images/xcom/Sec/Wasana Nilakshi.jpg';
 import rashmiRuwanthika from '../assets/images/xcom/Sec/Rashmi Ruwanthika Athukorala.jpg';
 import hasiniVimandya from '../assets/images/xcom/Des-WIF/Hasini Sarathchandra.jpeg'; 
 import kasunJahith from '../assets/images/xcom/Ev-Co/kasun bandara.jpeg'; 
+import nipuniNawanjana from '../assets/images/xcom/Nipuni Nawanjana.jpg';
 import kishoJeyapragash from '../assets/images/xcom/Tech/jp-tech-lead.PNG';
 import kavindaChamod from '../assets/images/xcom/Mem-Rec/Kavinda Chandrasiri.jpg';
 import chamodyaPerera from '../assets/images/xcom/Mem-Rec/Chamodya Perera.jpg';
@@ -21,6 +22,7 @@ import raeesAhamed from '../assets/images/xcom/Tresu/Raees Ahamed.jpg';
 import tharinduDevinda from '../assets/images/xcom/Tresu/Tharindu devinda.jpg';
 import nilakshanRaveendran from '../assets/images/xcom/Des/NILAKSHAN R..jpg';
 import bhagyaLakshan from '../assets/images/xcom/Mar/MADHUSHANKA R.M.B.L..jpg';
+
 
 // Junior Committee
 import kavisanaKanthavanesan from '../assets/images/jxcom/Design/KANTHAVANESAN K.jpeg';
@@ -83,6 +85,7 @@ export const executiveCommittee = [
   { name: 'Misal Ranasinghe', role: 'Design Lead', img: misalRanasinghe },
   { name: 'Nilakshan Raveendran', role: 'Design Lead', img: nilakshanRaveendran },
   { name: 'Hasini Vimandya', role: 'Design Lead - WIF', img: hasiniVimandya },
+    { name: 'Nipuni Nawanjana', role: 'Club Lead (WIF)', img: nipuniNawanjana },
 ];
 
 export const juniorTechnicalTeam = [

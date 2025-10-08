@@ -1,7 +1,8 @@
 // src/pages/HomePage.jsx
 
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+// motion is used as JSX namespace (e.g. <motion.div/>) — ESLint sometimes flags it as unused
+import { motion, AnimatePresence } from 'framer-motion'; // eslint-disable-line no-unused-vars
 import { TypeAnimation } from 'react-type-animation';
 import { Link, scroller } from 'react-scroll';
 import { Link as RouterLink } from 'react-router-dom';
@@ -74,7 +75,7 @@ const TeamGrid = ({ teamData }) => (
           <img
             src={member.img}
             alt={member.name}
-            className="relative w-full h-full rounded-full object-cover border-4 border-gray-700 group-hover:border-teal-400 transition-colors duration-300"
+            className="relative w-full h-full rounded-full object-cover object-center border-4 border-gray-700 group-hover:border-teal-400 transition-colors duration-300"
           />
         </motion.div>
         <h4 className="font-semibold text-white">{member.name}</h4>
@@ -362,12 +363,12 @@ const HomePage = () => {
             <motion.p className="text-lg text-gray-400 max-w-2xl mx-auto mt-4 mb-16" initial={{ opacity: 0 }} whileInView={{ opacity: 1, delay: 0.2 }} viewport={{ once: true }}>
               The passionate individuals who drive our community forward with dedication and innovation.
             </motion.p>
-            <motion.div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-8 gap-y-12 justify-center" variants={containerVariant} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+            <motion.div className="flex flex-wrap justify-center gap-x-8 gap-y-12" variants={containerVariant} initial="hidden" whileInView="visible" viewport={{ once: true }}>
               {executiveCommittee.map((member, i) => (
-                <motion.div key={i} variants={itemVariant} className="text-center flex flex-col items-center group">
-                  <motion.div whileHover={{ scale: 1.1, y: -10 }} transition={{ type: 'spring', stiffness: 300 }} className="relative w-32 h-32 md:w-36 md:h-36 mb-4">
+                <motion.div key={i} variants={itemVariant} className="w-40 sm:w-44 md:w-48 text-center flex flex-col items-center group">
+                  <motion.div whileHover={{ scale: 1.1, y: -10 }} transition={{ type: 'spring', stiffness: 300 }} className="relative w-32 h-32 md:w-36 md:h-36 mb-4 mx-auto">
                     <div className="absolute inset-0 bg-teal-500 rounded-full blur-lg opacity-0 group-hover:opacity-50 transition-opacity duration-300"></div>
-                    <img src={member.img} alt={member.name} className="relative w-full h-full rounded-full object-cover border-4 border-gray-700 group-hover:border-teal-400 transition-colors duration-300" />
+                    <img src={member.img} alt={member.name} className="relative w-full h-full rounded-full object-cover object-center border-4 border-gray-700 group-hover:border-teal-400 transition-colors duration-300" />
                   </motion.div>
                   <h3 className="font-bold text-lg md:text-xl text-white">{member.name}</h3>
                   <p className="text-gray-400">{member.role}</p>
